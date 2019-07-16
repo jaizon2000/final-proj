@@ -10,20 +10,34 @@ html {
 
 main {
     background-color: aliceblue;
+    /* Centers content */
     position: absolute;
     margin: auto;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    /* --- */
 
     width: 800px;
     height: 500px;
     
    text-align:  center;
-
 }
 
+#content {
+    /* Centers items in content */
+    position: relative;
+    margin: auto;
+    top: 20%; /* May change after styling more*/
+    /* --- */
+}
+a {
+    text-decoration: none;
+    color: black;
+}
 /* teaches centering:
 http://www.tipue.com/blog/center-a-div/
+https://www.w3.org/Style/Examples/007/center.en.html
 */
+

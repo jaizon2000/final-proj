@@ -1,0 +1,42 @@
+html {
+    background: url(images/bg.jpg), linear-gradient(#57D2F4, #04A287);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 50% 50%;
+
+    max-width: 1400px;
+    height: 768px;
+
+    color: #F3F0EC;
+}
+main, #grid, #history {
+    width: 640px;
+}
+main {
+    background-color: lightseagreen;
+    /* Centers content */
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    /* ---  
+    define a width or it'll use the whole page & won't center*/
+
+}
+
+#grid {
+    background-color: #86879E;
+
+}
+
+#stats {
+    background-color: #495466;
+    width: 320px;
+
+}
+
+#history {
+    background-color: #32343D;
+}
