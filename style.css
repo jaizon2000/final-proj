@@ -3,10 +3,27 @@ html {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-position: 50% 50%;
-    
-    width: 1400px;
+
+    max-width: 1400px;
     height: 768px;
 }
+
 main {
+    background-color: aliceblue;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    width: 800px;
+    height: 500px;
     
+   text-align:  center;
+
 }
+
+/* teaches centering:
+http://www.tipue.com/blog/center-a-div/
+*/
