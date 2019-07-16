@@ -10,7 +10,8 @@ html {
     color: #F3F0EC;
 }
 main, #grid, #history {
-    width: 640px;
+    width: 640px; 
+    border: 2px solid rgb(44, 14, 78);
 }
 main {
     background-color: lightseagreen;
@@ -22,12 +23,16 @@ main {
     bottom: 0;
     left: 0;
     /* ---  
-    define a width or it'll use the whole page & won't center*/
+    define a width&height or it'll use the whole page & won't center*/
+    height: 500px;
 
+    box-shadow: -10px 10px rgba(0, 0, 0, 0.4);
 }
 
 #grid {
     background-color: #86879E;
+    /* width: 640px;  40 tiles x */
+    height: 320px; /* 20 tiles y */
 
 }
 
@@ -39,4 +44,9 @@ main {
 
 #history {
     background-color: #32343D;
+}
+#in-game-stats {
+    position: relative;
+    top: 210px;
+    left: 20px;
 }
