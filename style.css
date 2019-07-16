@@ -1,0 +1,12 @@
+html {
+    background: url(images/bg.jpg), linear-gradient(#57D2F4, #04A287);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 50% 50%;
+    
+    width: 1400px;
+    height: 768px;
+}
+main {
+    
+}
