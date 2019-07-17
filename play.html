@@ -7,28 +7,38 @@
 </head>
 
 <body>
-    <main>
-
+    <main id="play-page">
+        <!-- GAME -->
         <div id="grid">
             <h5>Grid</h5>
-            
-            <div id="in-game-stats">
+
+            <div id="grid-stats">
                 <div id="life"><img src="images/heart.png" width="16px"></div>
                 <div id="lvl"><b>LV.</b></div>
             </div>
         </div>
 
-
+        <!-- HISTORY -->
         <div id="history">
             <h5>History</h5>
         </div>
 
-
+        <!-- STATS -->
         <!-- To be on the right, position:absolute -->
         <div id="stats">
-            <h5>Stats</h5>
+            <h1>- Stats -</h1>
+            <div>NAME: <input id='name' formaction="main.js"></div>
+            <div>LEVEL: <span id="lvl"></span></div>
+            <div>STR: <span id='str'></span></div>
+            <div>MONSTERS: <br>KILLED <span id='killed'></span></div>
         </div>
 
+        <!-- BUTTONS -->
+        <div id="menu">
+            <h4>buttons</h4>
+            <div><button>Home</button></div>
+            <div><button>Reset</button></div>
+        </div>
     </main>
     <!-- JAVASCRIPT -->
     <script src="main.js"></script>

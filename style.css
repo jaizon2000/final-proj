@@ -6,9 +6,10 @@ html {
 
     max-width: 1400px;
     height: 768px;
+    overflow: hidden;
 }
 
-main {
+main#start-page {
     background-color: aliceblue;
     /* Centers content */
     position: absolute;
@@ -21,23 +22,27 @@ main {
 
     width: 800px;
     height: 500px;
-    
-   text-align:  center;
 }
 
-#content {
+#start-page {
     /* Centers items in content */
-    position: relative;
-    margin: auto;
-    top: 20%; /* May change after styling more*/
-    /* --- */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+#start-page>#content {
+    /* background-color: rgba(165, 42, 42, 0.1); */
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 a {
     text-decoration: none;
     color: black;
 }
-/* teaches centering:
-http://www.tipue.com/blog/center-a-div/
-https://www.w3.org/Style/Examples/007/center.en.html
-*/
-
+.hide {
+    display: none;
+}
+/* ----- END OF START PAGE */
