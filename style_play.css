@@ -33,10 +33,12 @@ html {
 #play-page,
 #grid-box,
 #history {
-    width: 640px;
+    width: 650px;
     border: 2px solid rgb(44, 14, 78);
 
 }
+
+
 /* GAME CONTAINER */
 #play-page{
     background-color: lightseagreen;
@@ -64,17 +66,23 @@ html {
 /* GRID-WALK */
 #grid-box {
     background-color: #86879E;
-    /* width: 640px;  40 tiles x */
-    height: 320px;
-    /* 20 tiles y */
 
 }
 
 #grid-box>#grid {
-    /* width: 640px;
-    height: 320px; */
-    display: block;
+    /* GRID WALK SIZE */
+    /* background-color: white; */
+}
+#grid-box>#grid div {
+    border: 1px solid black;
+    width: 16px;
+    height: 16px;
+    float: left; /* displays as a grid */
+}
+#grid-stats {
     position: absolute;
+    bottom: 0;
+    left: 20px;
 }
 /* ------- */
 
@@ -112,11 +120,7 @@ div>h1 {
     margin: 0 25px;
 
 }
-#grid-stats {
-    position: relative;
-    top: 210px;
-    left: 20px;
-}
+
 /* ------ */
 
 

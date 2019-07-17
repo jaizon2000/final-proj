@@ -6,11 +6,11 @@
 // --- INDEX.HTML --- //
 if (window.location.pathname == "/index.html") {
     console.log('take me home, country road');
-}
-else if (window.location.pathname == "/play.html") {
+} else if (window.location.pathname == "/play.html") {
     console.log('play to win');
-    play()
-    
+    buildGrid();
+    play();
+
 }
 
 // --- PLAY.HTML --- //
@@ -25,7 +25,7 @@ function play() {
     document.body.addEventListener('mousedown', hideHowTo);
     // Name
     document.addEventListener('keydown', keyDown);
-    
+
 
     // Functions //
     //---------- //
@@ -52,9 +52,18 @@ function play() {
     function showHowTo() {
         document.getElementById('how-to').classList.remove('hide');
     }
+
     function hideHowTo() {
         document.getElementById('how-to').classList.add('hide');
         console.log('hiding');
     }
+}
 
+function buildGrid() {
+    for (let col = 1; col < 16 + 1; col++) {
+        for (let row = 1; row < 2; row++) {
+            // col=x, row=y
+            document.getElementById('grid').innerHTML += "<div id='cell" + col + "-" + row + "'></div>";
+        }
+    }
 }
