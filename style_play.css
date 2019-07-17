@@ -9,38 +9,60 @@ html {
 
     color: #F3F0EC;
 }
+.hide {
+    display: none;
+}
+.centerText {
+    text-align: center;
+}
 
-main#play-page,
-#grid,
+/* HOW TO BOX */
+#how-to {
+    background-color: black;
+
+    /* Positioning */
+    margin: auto;
+    position: relative;
+    z-index: 2; /* Bring at the front */
+    width: 400px;
+    padding: 0 75px;
+}
+/* ------ */
+
+
+#play-page,
+#grid-box,
 #history {
-
     width: 640px;
     border: 2px solid rgb(44, 14, 78);
 
 }
-
-main#play-page{
+/* GAME CONTAINER */
+#play-page{
     background-color: lightseagreen;
-    /* Centers content in Middle */
+    /* Centers content in Middle-ish */
     position: absolute;
     margin: auto;
     top: 0;
-    right: 0;
     bottom: 0;
-    left: 0;
+    left: 450px;
     /* ---  
     define a width&height or it'll use the whole page & won't center*/
     height: 500px;
 
 }
+/* ---- */
 
-main#play-page,
+#play-page,
 #stats {
     box-shadow: -10px 10px rgba(0, 0, 0, 0.4);
 
 }
 
-#grid {
+
+
+/* GRID-WALK */
+#grid-box {
     background-color: #86879E;
     /* width: 640px;  40 tiles x */
     height: 320px;
@@ -48,6 +70,17 @@ main#play-page,
 
 }
 
+#grid-box>#grid {
+    /* width: 640px;
+    height: 320px; */
+    display: block;
+    position: absolute;
+}
+/* ------- */
+
+
+
+/* STATS */
 div>h1 {
     /* Align -Stats- to center */
     position: relative;
@@ -73,23 +106,25 @@ div>h1 {
 
     /* Container Settings */
     position: absolute;
-    left: 100%;
+    right: 650px;
     top: 0;
     padding: 0 0 25px 25px;
-    margin-left: 25px;
+    margin: 0 25px;
 
 }
+#grid-stats {
+    position: relative;
+    top: 210px;
+    left: 20px;
+}
+/* ------ */
+
 
 #history {
     background-color: #32343D;
     overflow: hidden;
 }
 
-#grid-stats {
-    position: relative;
-    top: 210px;
-    left: 20px;
-}
 
 #menu {
     background-color: darkgray;
