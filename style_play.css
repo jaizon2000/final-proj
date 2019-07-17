@@ -82,6 +82,7 @@ div>h1 {
 
 #history {
     background-color: #32343D;
+    overflow: hidden;
 }
 
 #grid-stats {

@@ -5,8 +5,7 @@ html {
     background-position: 50% 50%;
 
     max-width: 1400px;
-    height: 768px;
-    overflow: hidden;
+    max-height: 768px;
 }
 
 main#start-page {
@@ -41,8 +40,5 @@ main#start-page {
 a {
     text-decoration: none;
     color: black;
-}
-.hide {
-    display: none;
 }
 /* ----- END OF START PAGE */
