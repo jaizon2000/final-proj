@@ -60,10 +60,10 @@ function play() {
 }
 
 function buildGrid() {
-    for (let col = 1; col < 16 + 1; col++) {
-        for (let row = 1; row < 2; row++) {
+    for (let row = 1; row < 14 + 1; row++) { // y
+        for (let col = 1; col < 26 + 1; col++) { // x
             // col=x, row=y
-            document.getElementById('grid').innerHTML += "<div id='cell" + col + "-" + row + "'></div>";
+            document.getElementById('grid').innerHTML += "<div><img src='images/grass_tile.png' id='cell" + col + "-" + row + "'></div>";
         }
     }
 }

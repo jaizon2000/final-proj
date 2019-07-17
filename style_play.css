@@ -33,8 +33,13 @@ html {
 #play-page,
 #grid-box,
 #history {
-    width: 650px;
+    width: 418px; /* size of grid, etc */
     border: 2px solid rgb(44, 14, 78);
+
+}
+#play-page,
+#stats {
+    box-shadow: -10px 10px rgba(0, 0, 0, 0.4);
 
 }
 
@@ -55,13 +60,6 @@ html {
 }
 /* ---- */
 
-#play-page,
-#stats {
-    box-shadow: -10px 10px rgba(0, 0, 0, 0.4);
-
-}
-
-
 
 /* GRID-WALK */
 #grid-box {
@@ -69,16 +67,14 @@ html {
 
 }
 
-#grid-box>#grid {
-    /* GRID WALK SIZE */
-    /* background-color: white; */
-}
+
 #grid-box>#grid div {
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 16px;
     height: 16px;
     float: left; /* displays as a grid */
 }
+
 #grid-stats {
     position: absolute;
     bottom: 0;
