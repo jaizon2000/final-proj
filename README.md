@@ -25,4 +25,5 @@ knight.png - https://bit.ly/2Sko7Kx
     + https://bit.ly/30tuQoq
 * Position Property - https://www.w3schools.com/css/css_positioning.asp
 * HTML DOM events list - https://www.w3schools.com/jsref/dom_obj_event.asp
+* Why overflow doesn't work with wrap reverse - https://bit.ly/2SlsNji
 

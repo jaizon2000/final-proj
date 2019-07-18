@@ -15,6 +15,11 @@ if (window.location.pathname == "/index.html") {
 
 // --- PLAY.HTML --- //
 function play() {
+
+    // Global Vars
+    let grid = document.getElementById('grid');
+    let history = document.getElementById('history');
+
     // Event Listeners //
     //--------------- //
 
@@ -23,7 +28,7 @@ function play() {
     // How To Button
     document.getElementById('how-to-btn').addEventListener('click', showHowTo);
     document.body.addEventListener('mousedown', hideHowTo);
-    // Name
+    // Key Down Event
     document.addEventListener('keydown', keyDown);
 
 
@@ -31,14 +36,19 @@ function play() {
     //---------- //
     // space bar event.keyCode == 32
 
-    // 
-
-    // Reset
+    // RESET GRID
     function reset() {
         console.log('randomize grid and restart all stats');
+        // Remove Current Grid
+        grid.innerHTML = '';
+
+        // New Random Grid
+        buildGrid();
     }
 
-    // Get Value On ENTER
+    // Key Down Event Function
+    let count = 1;
+
     function keyDown(event) {
         let key = event.keyCode;
 
@@ -46,24 +56,57 @@ function play() {
             let name = document.getElementById('name').value;
             console.log(name);
         }
-    }
+        if (key == 38) { // UP KEY
+            history.innerHTML += '<div><img width="32px" src="images/up_arrow.png"></div>';
+        } else if (key == 39) { // RIGHT KEY
+            history.innerHTML += '<div><img width="32px" src="images/right_arrow.png"></div>';
+        }
 
-    // HIDE & SHOW HOW TO
-    function showHowTo() {
-        document.getElementById('how-to').classList.remove('hide');
-    }
-
-    function hideHowTo() {
-        document.getElementById('how-to').classList.add('hide');
-        console.log('hiding');
     }
 }
 
+
+
+// HIDE & SHOW HOW TO
+function showHowTo() {
+    document.getElementById('how-to').classList.remove('hide');
+}
+
+function hideHowTo() {
+    document.getElementById('how-to').classList.add('hide');
+    console.log('hiding');
+}
+
+
+// Build Random Grid
 function buildGrid() {
-    for (let row = 1; row < 14 + 1; row++) { // y
-        for (let col = 1; col < 26 + 1; col++) { // x
+
+    let tile = 'grass_tile.png';
+
+    for (let row = 1; row < 12 + 1; row++) { // y
+        for (let col = 1; col < 12 + 1; col++) { // x
             // col=x, row=y
-            document.getElementById('grid').innerHTML += "<div><img src='images/grass_tile.png' id='cell" + col + "-" + row + "'></div>";
+
+            // RANDOM TILES
+            let randomTile = Math.random(); // 0-0.99
+            if (randomTile < 0.85) { // 90%
+                tile = 'grass_tile.png';
+            } else if (randomTile < 0.91) { // 6%
+                tile = 'flower_tile.png';
+            } else if (randomTile < 0.95) { // 4%
+                tile = 'bush_tile.png';
+            } else if (randomTile < 0.98) {
+                tile = 'slime.png';
+            } else if (randomTile < 10) {
+                tile = 'slime_king.png';
+            }
+
+            if (row == 1 || row == 14) {
+                console.log('we need to build a wall!');
+            }
+
+            grid.innerHTML += "<div><img width='32px' src='images/" + tile + "' id='cell" + col + "-" + row + "'></div>";
+
         }
     }
 }

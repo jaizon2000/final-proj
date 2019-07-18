@@ -8,6 +8,7 @@ html {
     height: 768px;
 
     color: #F3F0EC;
+
 }
 .hide {
     display: none;
@@ -33,20 +34,21 @@ html {
 #play-page,
 #grid-box,
 #history {
-    width: 418px; /* size of grid, etc */
-    border: 2px solid rgb(44, 14, 78);
+    width: 386px; /* size of grid, etc */
 
 }
 #play-page,
 #stats {
     box-shadow: -10px 10px rgba(0, 0, 0, 0.4);
+    border: 2px solid rgb(44, 14, 78);
+
 
 }
 
 
 /* GAME CONTAINER */
 #play-page{
-    background-color: lightseagreen;
+    background-color: #64C196;
     /* Centers content in Middle-ish */
     position: absolute;
     margin: auto;
@@ -55,7 +57,7 @@ html {
     left: 450px;
     /* ---  
     define a width&height or it'll use the whole page & won't center*/
-    height: 500px;
+    height: 520px;
 
 }
 /* ---- */
@@ -63,23 +65,25 @@ html {
 
 /* GRID-WALK */
 #grid-box {
-    background-color: #86879E;
+    background-color: #64C196;
 
 }
 
 
 #grid-box>#grid div {
     /* border: 1px solid black; */
-    width: 16px;
-    height: 16px;
+    width: 32px;
+    height: 32px;
     float: left; /* displays as a grid */
 }
 
 #grid-stats {
     position: absolute;
-    bottom: 0;
+    top: 180px;
     left: 20px;
+    background-color: rgba(0, 0, 0, 0.3);
 }
+
 /* ------- */
 
 
@@ -96,7 +100,6 @@ div>h1 {
     /* Color & txt Shadow */
     background-color: #495466;
     text-shadow: -3px 2px rgba(0, 0, 0, 0.4);
-    border: 2px solid rgb(44, 14, 78);
 
 
     /* Stats Box Size */
@@ -110,7 +113,7 @@ div>h1 {
 
     /* Container Settings */
     position: absolute;
-    right: 650px;
+    left: -350px;
     top: 0;
     padding: 0 0 25px 25px;
     margin: 0 25px;
@@ -119,17 +122,28 @@ div>h1 {
 
 /* ------ */
 
-
+/* HISTORY */
 #history {
     background-color: #32343D;
-    overflow: hidden;
+    scroll-behavior: smooth;
+    height: 64px;
+
+    overflow: auto;
+    display: flex;
+    flex-direction: row-reverse;
+    direction: rtl;
+    /* flex-wrap: wrap;   */
+    
 }
+/*------------ END OF HISTORY*/
 
 
+/* BUTTION MENU */
 #menu {
     background-color: darkgray;
     display: flex;
-    height: 100px;
+    height: 50px;
     justify-content: center;
     align-items: center;
 }
+/* ----- END OF BTN MENU */
