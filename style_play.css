@@ -126,9 +126,9 @@ div>h1 {
 #history {
     background-color: #32343D;
     scroll-behavior: smooth;
-    height: 32px;
+    height: 64px;
 
-    overflow: auto;
+    overflow-y: hidden;
     display: flex;
     flex-direction: row-reverse;
     direction: rtl;
