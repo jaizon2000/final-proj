@@ -67,6 +67,17 @@ function play() {
 
 
 
+// HIDE & SHOW HOW TO
+function showHowTo() {
+    document.getElementById('how-to').classList.remove('hide');
+}
+
+function hideHowTo() {
+    document.getElementById('how-to').classList.add('hide');
+    console.log('hiding');
+}
+
+
 // Build Random Grid
 function buildGrid() {
 
@@ -89,27 +100,13 @@ function buildGrid() {
             } else if (randomTile < 10) {
                 tile = 'slime_king.png';
             }
-            grid.innerHTML += "<div><img width='32px' src='images/" + tile + "' id='cell" + col + "-" + row + "'></div>";
-        }
-        for (row = 1; row == 1 || row == 14; row++) {
-            for (col = 1; ) {
+
+            if (row == 1 || row == 14) {
                 console.log('we need to build a wall!');
-
             }
+
+            grid.innerHTML += "<div><img width='32px' src='images/" + tile + "' id='cell" + col + "-" + row + "'></div>";
+
         }
-
-
-
     }
-}
-}
-
-// HIDE & SHOW HOW TO
-function showHowTo() {
-    document.getElementById('how-to').classList.remove('hide');
-}
-
-function hideHowTo() {
-    document.getElementById('how-to').classList.add('hide');
-    console.log('hiding');
 }
