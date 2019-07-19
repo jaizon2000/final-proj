@@ -118,7 +118,6 @@ function hideHowTo() {
 
 // Build Random Grid
 function buildGrid() {
-    let display = '';
     let tile = 'fence_tl_tile.png';
 
     for (let row = 1; row <= 12; row++) { // y
@@ -126,7 +125,9 @@ function buildGrid() {
             // col=x, row=y
             let id = 'cell' + col + '-' + row;
 
-            if (row == 1 || row == 12 || col == 1 || col == 12) {
+         if (row==6 && col==6) {
+            tile = 'knight.png';
+         } else if (row == 1 || row == 12 || col == 1 || col == 12) {
                 tile = 'fence_x_tile.png';
                 // grid.innerHTML += "<div><img  src='images/fence_x_tile.png' id='" + id + "'></div>";
                 if (row == 1 && col == 1) {
@@ -163,8 +164,6 @@ function buildGrid() {
 
             // console.log('we need to build a wall!');
         }
-
-        // grid.innerHTML += "<div><img  src='images/" + tile + "' id='cell" + col + "-" + row + "'></div>";
 
     }
 }
