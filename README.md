@@ -30,3 +30,4 @@ knight.png - https://bit.ly/2Sko7Kx
         - Arrays - https://alligator.io/js/push-pop-shift-unshift-array-methods/
         - Arrays - -https://hackernoon.com/work-with-javascript-arrays-like-a-boss-97207a042e42
         - Looping Through Arrays - https://love2dev.com/blog/javascript-for-loop-foreach/
+* Document Objects - https://www.w3schools.com/js/js_htmldom_document.asp (document.)

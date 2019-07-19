@@ -21,7 +21,7 @@ function play() {
     // Reset Button
     document.getElementById('reset-btn').addEventListener('click', reset);
     // New Map Button
-    document.getElementById('new-map').addEventListener('click', play);
+    document.getElementById('new-map').addEventListener('click', newMap);
     // How To Button
     document.getElementById('how-to-btn').addEventListener('click', showHowTo);
     document.body.addEventListener('mousedown', hideHowTo);
@@ -35,6 +35,7 @@ function play() {
 
     // RESET GRID
     function reset() {
+        document.documentElement.style.cursor = 'progress';
         console.log('randomize grid and restart all stats');
         // Remove Current Grid
         grid.innerHTML = '';
@@ -46,7 +47,9 @@ function play() {
         document.getElementById('lvl').innerHTML = '0';
         document.getElementById('str').innerHTML ='0';
         document.getElementById('killed').innerHTML = '0';
+        document.documentElement.style.cursor = 'default';
     }
+
 function newMap() {
     grid.innerHTML = '';
     buildGrid();
