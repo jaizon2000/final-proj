@@ -160,8 +160,8 @@ function buildGrid() {
                     tile = 'slime_king.png';
                 }
             }
-            grid.innerHTML += "<div><img  src='images/" + tile + "' id='" + id + "'></div>";
-
+            // grid.innerHTML += "<div><img  src='images/" + tile + "' id='" + id + "'></div>";
+            grid.innerHTML += "<div><img  src='images/" + tile + "' id='" + id + "'><img src='images/knight.png'></div>";
             // console.log('we need to build a wall!');
         }
 
