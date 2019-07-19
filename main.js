@@ -3,14 +3,10 @@
 
 // Event Listener
 
-// --- INDEX.HTML --- //
-if (window.location.pathname == "/index.html") {
-    console.log('take me home, country road');
-} else if (window.location.pathname == "/play.html") {
-    buildGrid();
-    play();
 
-}
+buildGrid();
+play();
+
 
 // --- PLAY.HTML --- //
 function play() {
@@ -48,8 +44,13 @@ function play() {
 
         // Reset Stats
         document.getElementById('lvl').innerHTML = '0';
+        document.getElementById('str').innerHTML ='0';
+        document.getElementById('killed').innerHTML = '0';
     }
-
+function newMap() {
+    grid.innerHTML = '';
+    buildGrid();
+}
     // Key Down Event Function
     let histList = [];
     let addKey = 'slime.png';

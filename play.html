@@ -47,39 +47,35 @@
         <!-- HISTORY -->
         <div id="history">
         </div>
+
         <!-- STATS -->
-        <!-- To be on the right, position:absolute -->
         <div id="stats">
             <h1>- Stats -</h1>
             <!-- FIX CSS SINCE ITS DISPLAYED AS FLEX, USE TABLE INSTEAD -->
+            <table id='tableName'>
+                <tr>
+                    <th>NAME: </th>
+                </tr>
+                <tr>
+                    <th><input id='name'></th>
+                </tr>
+            </table>
             <table>
-                <tr>
-                    <div>
-                        <td>NAME:</td>
-                        <td><input id='name'></td>
-                    </div>
-                </tr>
 
                 <tr>
-                    <div>
-                        <td>LEVEL: </td>
-                        <td><span id="lvl">0</span></td>
-                    </div>
+                    <th>LEVEL: </th>
+                    <td><span id="lvl">0</span></td>
 
                 </tr>
 
                 <tr>
-                    <div>
-                    <td>STR: </td>
+                    <th>STR: </th>
                     <td><span id='str'>0</span></td>
-                    </div>
                 </tr>
 
                 <tr>
-                    <div>
-                    <td>MONSTERS: <br>KILLED </td>
+                    <th>MONSTERS: <br>KILLED </th>
                     <td><span id='killed'>0</span></td>
-                    </div>
                 </tr>
 
             </table>

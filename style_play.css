@@ -10,9 +10,11 @@ html {
     color: #F3F0EC;
 
 }
+
 .hide {
     display: none;
 }
+
 .centerText {
     text-align: center;
 }
@@ -24,19 +26,23 @@ html {
     /* Positioning */
     margin: auto;
     position: relative;
-    z-index: 2; /* Bring at the front */
+    z-index: 2;
+    /* Bring at the front */
     width: 400px;
     padding: 5px 75px;
 }
-/* ------ */
+
+/* ------  END OF HOW TO BOX*/
 
 
 #play-page,
 #grid-box,
 #history {
-    width: 386px; /* size of grid, etc */
+    width: 386px;
+    /* size of grid, etc */
 
 }
+
 #play-page,
 #stats {
     box-shadow: -10px 10px rgba(0, 0, 0, 0.4);
@@ -47,7 +53,7 @@ html {
 
 
 /* GAME CONTAINER */
-#play-page{
+#play-page {
     background-color: #64C196;
     /* Centers content in Middle-ish */
     position: absolute;
@@ -60,7 +66,8 @@ html {
     height: 520px;
 
 }
-/* ---- */
+
+/* ------- END OF GAME CONTAINER*/
 
 
 /* GRID-WALK */
@@ -74,11 +81,14 @@ html {
     /* border: 1px solid black; */
     width: 32px;
     height: 32px;
-    float: left; /* displays as a grid */
+    float: left;
+    /* displays as a grid */
 }
+
 #grid img {
     width: 32px;
 }
+
 #grid-stats {
     position: absolute;
     top: 180px;
@@ -86,7 +96,7 @@ html {
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-/* ------- */
+/* ------- END OF GRID WALK*/
 
 
 
@@ -94,7 +104,7 @@ html {
 div>h1 {
     /* Align -Stats- to center */
     position: relative;
-    left: 40px;
+    /* left: 40px; */
     letter-spacing: 5px;
 }
 
@@ -105,41 +115,69 @@ div>h1 {
 
 
     /* Stats Box Size */
-    width: 250px;
+    width: 270px;
     height: 475px;
 
-    /* Content Display Settings*/
-    display: flex;
+    /* Content Display Settings*
+    /* display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-evenly; */
 
     /* Container Settings */
     position: absolute;
-    left: -350px;
+    left: -380px;
     top: 0;
-    padding: 0 0 25px 25px;
+    padding: 0 25px;
     margin: 0 25px;
 
 }
 
-/* ------ */
+table {
+    border-collapse: separate;
+    border-spacing: 0 20px;
+}
+table#tableName {
+    border-collapse: separate;
+    border-spacing: 0 10px;
+}
+th {
+    text-align: left;
+}
+td {
+    text-align: right;
+    width: 200px;
+    font-size: 40px;
+    vertical-align: middle;
+}
+/* table,
+tr,
+td {
+    border: 1px solid black;
+} */
+
+/* --------------- END OF STATS*/
 
 /* HISTORY */
 #history {
     background-color: #32343D;
     scroll-behavior: smooth;
-    height: 64px;
+    height: 32px;
 
-    overflow: auto;
+    overflow: hidden;
+    /* Hide scroll bars */
     display: flex;
+    /* Displays all in one line */
     flex-direction: row-reverse;
+    /* 1 2 3 ==> 3 2 1 */
     direction: rtl;
-    /* flex-wrap: wrap;   */
-    
+    /* Determines where new img appear (rtl = new img appear on most left */
+
 }
+
 #history img {
     width: 32px;
 }
+
 /*------------ END OF HISTORY*/
 
 
@@ -151,7 +189,9 @@ div>h1 {
     justify-content: center;
     align-items: center;
 }
-#menu > div {
+
+#menu>div {
     margin: 0 10px;
 }
+
 /* ----- END OF BTN MENU */
