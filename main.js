@@ -19,7 +19,7 @@ function play() {
     //--------------- //
 
     // Reset Button
-    document.getElementById('reset-btn').addEventListener('click', reset);
+    document.getElementById('reset-btn').addEventListener('click', cursorWait);
     // New Map Button
     document.getElementById('new-map').addEventListener('click', newMap);
     // How To Button
@@ -32,10 +32,13 @@ function play() {
     // Functions //
     //---------- //
     // space bar event.keyCode == 32
+    function cursorWait() {
+        document.documentElement.style.cursor = 'progress';
+        setTimeout(reset(), 5000);
 
+    }
     // RESET GRID
     function reset() {
-        document.documentElement.style.cursor = 'progress';
         console.log('randomize grid and restart all stats');
         // Remove Current Grid
         grid.innerHTML = '';
@@ -47,7 +50,7 @@ function play() {
         document.getElementById('lvl').innerHTML = '0';
         document.getElementById('str').innerHTML = '0';
         document.getElementById('killed').innerHTML = '0';
-        document.documentElement.style.cursor = 'default';
+        // document.documentElement.style.cursor = 'default';
     }
 
     function newMap() {
@@ -154,14 +157,15 @@ function buildGrid() {
                     tile = 'flower_tile.png';
                 } else if (randomTile < 0.95) { // 4%
                     tile = 'bush_tile.png';
+                    
                 } else if (randomTile < 0.98) { // 3%
                     tile = 'slime.png';
                 } else if (randomTile < 10) { // 2%
                     tile = 'slime_king.png';
                 }
             }
-            // grid.innerHTML += "<div><img  src='images/" + tile + "' id='" + id + "'></div>";
-            grid.innerHTML += "<div><img  src='images/" + tile + "' id='" + id + "'><img src='images/knight.png'></div>";
+            grid.innerHTML += "<div><img  src='images/" + tile + "' id='" + id + "'></div>";
+            
             // console.log('we need to build a wall!');
         }
 
