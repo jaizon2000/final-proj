@@ -1,4 +1,4 @@
-/* TITLE */
+/* THE CONQUEST SCRIPT */
 'use strict';
 
 // Event Listener
@@ -62,34 +62,34 @@ function play() {
         let key = event.keyCode;
         let addKey = 'grass_tile.png';
         let theKey = '';
-        
+
         // ENTER Key
         if (key == 13) {
             let name = document.getElementById('name').value;
             console.log(name);
+
+            // ARROWS
+        } else if (key == 38 || key == 39 || key == 40 || key == 37) {
+
+            if (key == 38) { // UP key
+                theKey = 'up_arrow.png';
+                // history.innerHTML += '<div><img src="images/up_arrow.png"></div>';
+            } else if (key == 39) { // RIGHT key
+                theKey = 'right_arrow.png';
+                // history.innerHTML += '<div><img src="images/right_arrow.png"></div>';
+            } else if (key == 40) { // DOWN key
+                theKey = 'down_arrow.png';
+            } else if (key == 37) { //LEFT key
+                theKey = 'left_arrow.png';
+            }
+
+            addKey = '<div><img src="images/' + theKey + '"></div>';
+
+            fixList(histList, addKey);
+            history.innerHTML = histList.join('');
+
+            // console.log(histList);
         }
-
-
-        // ARROWS
-        // if (key in these);
-        if (key == 38) { // UP key
-            theKey = 'up_arrow.png';
-            // history.innerHTML += '<div><img src="images/up_arrow.png"></div>';
-        } else if (key == 39) { // RIGHT key
-            theKey = 'right_arrow.png';
-            // history.innerHTML += '<div><img src="images/right_arrow.png"></div>';
-        } else if (key == 40) { // DOWN key
-            theKey = 'down_arrow.png';
-        } else if (key == 37) { //LEFT key
-            theKey = 'left_arrow.png';
-        }
-
-        addKey = '<div><img src="images/' + theKey +'"></div>';
-
-        fixList(histList, addKey);        
-        history.innerHTML = histList.join('');
-
-        console.log(histList);
 
     }
 }
