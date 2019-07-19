@@ -45,50 +45,50 @@ function play() {
 
         // Reset Stats
         document.getElementById('lvl').innerHTML = '0';
-        document.getElementById('str').innerHTML ='0';
+        document.getElementById('str').innerHTML = '0';
         document.getElementById('killed').innerHTML = '0';
         document.documentElement.style.cursor = 'default';
     }
 
-function newMap() {
-    grid.innerHTML = '';
-    buildGrid();
-}
+    function newMap() {
+        grid.innerHTML = '';
+        buildGrid();
+    }
     // Key Down Event Function
     let histList = [];
-    let addKey = 'slime.png';
 
 
     function keyDown(event) {
         let key = event.keyCode;
-
-        if (key == 13) { // ENTER Key
+        let addKey = 'grass_tile.png';
+        let theKey = '';
+        
+        // ENTER Key
+        if (key == 13) {
             let name = document.getElementById('name').value;
             console.log(name);
         }
+
+
+        // ARROWS
+        // if (key in these);
         if (key == 38) { // UP key
-            addKey = '<div><img src="images/up_arrow.png"></div>';
-
-            fixList(histList, addKey);
-            history.innerHTML += addKey;
-
-
+            theKey = 'up_arrow.png';
             // history.innerHTML += '<div><img src="images/up_arrow.png"></div>';
         } else if (key == 39) { // RIGHT key
-            addKey = '<div><img src="images/right_arrow.png"></div>';
-            fixList(histList, addKey);
+            theKey = 'right_arrow.png';
             // history.innerHTML += '<div><img src="images/right_arrow.png"></div>';
-        } else if (key == 40) {
-            addKey = '<div><img src="images/down_arrow.png"></div>';
-            fixList(histList, addKey);
+        } else if (key == 40) { // DOWN key
+            theKey = 'down_arrow.png';
         } else if (key == 37) { //LEFT key
-            addKey = '<div><img src="images/left_arrow.png"></div>';
-            fixList(histList, addKey);
+            theKey = 'left_arrow.png';
         }
-        // for (let i = 0; i < histList.length; i++) {
-        //     console.log(histList);
-        // }
+
+        addKey = '<div><img src="images/' + theKey +'"></div>';
+
+        fixList(histList, addKey);        
         history.innerHTML = histList.join('');
+
         console.log(histList);
 
     }
@@ -125,9 +125,9 @@ function buildGrid() {
             // col=x, row=y
             let id = 'cell' + col + '-' + row;
 
-         if (row==6 && col==6) {
-            tile = 'knight.png';
-         } else if (row == 1 || row == 12 || col == 1 || col == 12) {
+            if (row == 6 && col == 6) {
+                tile = 'knight.png';
+            } else if (row == 1 || row == 12 || col == 1 || col == 12) {
                 tile = 'fence_x_tile.png';
                 // grid.innerHTML += "<div><img  src='images/fence_x_tile.png' id='" + id + "'></div>";
                 if (row == 1 && col == 1) {
