@@ -26,7 +26,7 @@ html {
     position: relative;
     z-index: 2; /* Bring at the front */
     width: 400px;
-    padding: 0 75px;
+    padding: 5px 75px;
 }
 /* ------ */
 
@@ -76,7 +76,9 @@ html {
     height: 32px;
     float: left; /* displays as a grid */
 }
-
+#grid img {
+    width: 32px;
+}
 #grid-stats {
     position: absolute;
     top: 180px;
@@ -135,6 +137,9 @@ div>h1 {
     /* flex-wrap: wrap;   */
     
 }
+#history img {
+    width: 32px;
+}
 /*------------ END OF HISTORY*/
 
 
@@ -145,5 +150,8 @@ div>h1 {
     height: 50px;
     justify-content: center;
     align-items: center;
+}
+#menu > div {
+    margin: 0 10px;
 }
 /* ----- END OF BTN MENU */

@@ -26,16 +26,17 @@
         <!-- GAME -->
         <div id="grid-box">
             <div id="menu">
-            <h4>buttons</h4>
-            <div><a href="index.html"><button>Home</button></a></div>
-            <div><button id='how-to-btn'>How To</button></div>
-            <div><button id='reset-btn'>Reset</button></div>
-        </div>
+                <h4>buttons</h4>
+                <div><a href="index.html"><button>Home</button></a></div>
+                <div><button id='how-to-btn'>How To</button></div>
+                <div><button id='reset-btn'>Reset</button></div>
+                <div><button id='new-map'>New Map</button></div>
+            </div>
             <div id="grid">
                 <!-- <h5>Grid</h5> -->
                 <!-- Use Javascript to add grid -->
             </div>
-            
+
 
             <div id="grid-stats">
                 <div id="life"><img src="images/heart.png" width="16px"></div>
@@ -50,14 +51,42 @@
         <!-- To be on the right, position:absolute -->
         <div id="stats">
             <h1>- Stats -</h1>
-            <div>NAME: <input id='name'></div>
-            <div>LEVEL: <span id="lvl"></span></div>
-            <div>STR: <span id='str'></span></div>
-            <div>MONSTERS: <br>KILLED <span id='killed'></span></div>
+            <!-- FIX CSS SINCE ITS DISPLAYED AS FLEX, USE TABLE INSTEAD -->
+            <table>
+                <tr>
+                    <div>
+                        <td>NAME:</td>
+                        <td><input id='name'></td>
+                    </div>
+                </tr>
+
+                <tr>
+                    <div>
+                        <td>LEVEL: </td>
+                        <td><span id="lvl">0</span></td>
+                    </div>
+
+                </tr>
+
+                <tr>
+                    <div>
+                    <td>STR: </td>
+                    <td><span id='str'>0</span></td>
+                    </div>
+                </tr>
+
+                <tr>
+                    <div>
+                    <td>MONSTERS: <br>KILLED </td>
+                    <td><span id='killed'>0</span></td>
+                    </div>
+                </tr>
+
+            </table>
         </div>
 
         <!-- BUTTONS -->
-        
+
     </div>
 
 
