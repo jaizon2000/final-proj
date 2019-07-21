@@ -2,7 +2,8 @@
 'use strict';
 
 
-// Global Vars
+// Global Vars //
+// ----------- //
 let grid = document.getElementById('grid');
 let history = document.getElementById('history');
 
@@ -16,8 +17,11 @@ let killed = 0;
 let flowerTiles = [];
 let bushTiles = [];
 let slimeTiles = [];
-let grassTiles = [];
+let kingTiles = [];
+// let grassTiles = [];
 
+// HISTORY LIST
+let histList = [];
 
 
 let walkerCol = 6;
@@ -43,121 +47,131 @@ function play() {
     document.body.addEventListener('mousedown', hideHowTo);
     // Key Down Event
     document.addEventListener('keydown', keyDown);
+}
 
 
-    // Functions //
-    //---------- //
-    // space bar event.keyCode == 32
+// Functions //
+//---------- //
+// space bar event.keyCode == 32
 
-    // Changes the display of Stats
-    function displayStats() {
-        document.getElementById('lvl').innerHTML = lvl;
-        document.getElementById('grid-lvl').innerHTML = lvl;
-        document.getElementById('str').innerHTML = str;
-        document.getElementById('killed').innerHTML = killed;
-    }
+// Changes the display of Stats
+function displayStats() {
+    document.getElementById('lvl').innerHTML = lvl;
+    document.getElementById('grid-lvl').innerHTML = lvl;
+    document.getElementById('str').innerHTML = str;
+    document.getElementById('killed').innerHTML = killed;
+}
 
-    // RESET GRID
-    function reset() {
-        // Remove Current Grid
-        grid.innerHTML = '';
+// RESET GAME
+function reset() {
+    newMap();
 
-        // New Random Grid
-        buildGrid();
+    // Reset Stats
+    lvl = 0;
+    str = 0;
+    killed = 0;
+    displayStats();
+}
 
-        // Reset Stats
-        lvl = 0;
-        str = 0;
-        killed = 0;
-        displayStats();
-    }
+// BUILD NEW MAP
+function newMap() {
+    // Remove Current Grid
+    grid.innerHTML = '';
 
-    // BUILD NEW MAP
-    function newMap() {
-        grid.innerHTML = '';
-        buildGrid();
-    }
-    // Key Down Event Function
-    let histList = [];
+    // New Random Grid
+    buildGrid();
 
-    // ----------------- // 
-    // KEY DOWN FUNCTION //
-    // ----------------- //
-    function keyDown(event) {
-        let key = event.keyCode;
-        let displayKey = 'grass_tile.png';
-        let imgKey = '';
+    // Reset Tiles lists
+    flowerTiles = [];
+    bushTiles = [];
+    slimeTiles = [];
+    kingTiles = [];
 
-        // ENTER Key
-        if (key == 13) {
-            let name = document.getElementById('name').value;
-            console.log(name);
+    // Reset History
+    histList = [];
+    history.innerHTML = histList;
+}
 
-            // ARROW KEYS
-        } else if (key == 38 || key == 39 || key == 40 || key == 37) { // UP, RIGHT, DOWN, LEFT
 
-            if (key == 38) { // UP key
-                imgKey = 'up_arrow.png';
+// ----------------- // 
+// KEY DOWN FUNCTION //
+// ----------------- //
+function keyDown(event) {
+    let key = event.keyCode;
+    let displayKey = 'grass_tile.png';
+    let imgKey = '';
 
-                // FENCE BORDER CHECK
-                if (walkerRow == 2) {
-                    walkerRow == 2;
-                } else {
-                    walkerRow--;
-                }
-                // ----------
+    // ENTER Key
+    if (key == 13) {
+        let name = document.getElementById('name').value;
+        console.log(name);
 
-            } else if (key == 39) { // RIGHT key
-                imgKey = 'right_arrow.png';
+        // ARROW KEYS
+    } else if (key == 38 || key == 39 || key == 40 || key == 37) { // UP, RIGHT, DOWN, LEFT
 
-                // FENCE BORDER CHECK
-                if (walkerCol == 11) {
-                    walkerCol == 11;
-                } else {
-                    walkerCol++;
-                }
-                // ----------
+        if (key == 38) { // UP key
+            imgKey = 'up_arrow.png';
 
-            } else if (key == 40) { // DOWN key
-                imgKey = 'down_arrow.png';
-
-                // FENCE BORDER CHECK 
-                if (walkerRow == 11) {
-                    walkerRow = 11;
-                } else {
-                    walkerRow++;
-                }
-                // ----------
-
-            } else if (key == 37) { //LEFT key
-                imgKey = 'left_arrow.png';
-
-                // FENCE BORDER CHECK
-                if (walkerCol == 2) {
-                    walkerCol == 2;
-                } else {
-                    walkerCol--;
-                }
-                // ----------
+            // FENCE BORDER CHECK
+            if (walkerRow == 2) {
+                walkerRow == 2;
+            } else {
+                walkerRow--;
             }
+            // ----------
 
-            // DISPLAY IMG IN HISTORY
-            displayKey = '<div><img src="images/' + imgKey + '"></div>';
+        } else if (key == 39) { // RIGHT key
+            imgKey = 'right_arrow.png';
 
-            // DISPLAY KNIGHT
-            walkerId = 'cell' + walkerCol + '-' + walkerRow;
-            console.log(walkerRow)
-            let knight = document.getElementById(walkerId);
-            // let knightImg = document.getElementById('knight');
-            document.getElementById('knight').remove();
-            knight.innerHTML = '<img id="knight" src="images/knight.png">' + knight.innerHTML;
+            // FENCE BORDER CHECK
+            if (walkerCol == 11) {
+                walkerCol == 11;
+            } else {
+                walkerCol++;
+            }
+            // ----------
 
+        } else if (key == 40) { // DOWN key
+            imgKey = 'down_arrow.png';
 
-            fixList(histList, displayKey);
-            history.innerHTML = histList.join('');
+            // FENCE BORDER CHECK 
+            if (walkerRow == 11) {
+                walkerRow = 11;
+            } else {
+                walkerRow++;
+            }
+            // ----------
 
-            // console.log(histList);
+        } else if (key == 37) { //LEFT key
+            imgKey = 'left_arrow.png';
+
+            // FENCE BORDER CHECK
+            if (walkerCol == 2) {
+                walkerCol == 2;
+            } else {
+                walkerCol--;
+            }
+            // ----------
         }
+
+        // DISPLAY IMG IN HISTORY
+        displayKey = '<div><img src="images/' + imgKey + '"></div>';
+
+        // DISPLAY KNIGHT
+        // Knight coordinate
+        walkerId = 'cell' + walkerCol + '-' + walkerRow;
+
+        // Remove current Knight
+        document.getElementById('knight').remove();
+
+        // Add knight at walker id
+        let knight = document.getElementById(walkerId);
+        knight.innerHTML = '<img id="knight" src="images/knight.png">' + knight.innerHTML;
+
+
+        fixList(histList, displayKey);
+        // Display histList on web
+        history.innerHTML = histList.join('');
 
     }
 }
@@ -169,7 +183,6 @@ function fixList(histList, displayKey) {
 
     } else {
         histList.push(displayKey); // add elem at end
-
     }
 }
 
@@ -193,6 +206,8 @@ function buildGrid() {
             // col=x, row=y
             let id = 'cell' + col + '-' + row;
 
+
+            // PLACE FENCE TILES
             if (row == 1 || row == 12 || col == 1 || col == 12) {
                 tile = 'fence_x_tile.png';
                 if (row == 1 && col == 1) {
@@ -203,27 +218,32 @@ function buildGrid() {
                     tile = 'fence_bl_tile.png';
                 } else if (row == 12 && col == 12) {
                     tile = 'fence_br_tile.png';
-
                 } else if (col == 1) {
                     tile = 'fence_left_tile.png';
                 } else if (col == 12) {
                     tile = 'fence_right_tile.png';
                 }
-            } else {
 
+            } else {
                 // RANDOM TILES
                 let randomTile = Math.random(); // 0-0.99
                 if (randomTile < 0.85) { // 90%
                     tile = 'grass_tile.png';
                 } else if (randomTile < 0.91) { // 6%
                     tile = 'flower_tile.png';
+                    flowerTiles.push(col, row);
+
                 } else if (randomTile < 0.95) { // 4%
                     tile = 'bush_tile.png';
+                    bushTiles.push(col, row);
 
                 } else if (randomTile < 0.98) { // 3%
                     tile = 'slime.png';
+                    slimeTiles.push(col, row);
+
                 } else if (randomTile < 10) { // 2%
                     tile = 'slime_king.png';
+                    kingTiles.push(col, row);
                 }
             }
             grid.innerHTML += "<div id='" + id + "'><img src='images/" + tile + "'></div>";
@@ -231,6 +251,7 @@ function buildGrid() {
             // INITIAL KNIGHT TILE
             if (row == 6 && col == 6) {
                 tile = 'knight.png';
+
                 let knight = document.getElementById('cell6-6');
                 knight.innerHTML = "<img id='knight' src='images/" + tile + "'>" + knight.innerHTML;
             }
@@ -239,4 +260,3 @@ function buildGrid() {
 
     }
 }
-// document.getElementById('knight').remove();
