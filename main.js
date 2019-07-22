@@ -47,6 +47,7 @@ function play() {
     document.body.addEventListener('mousedown', hideHowTo);
     // Key Down Event
     document.addEventListener('keydown', keyDown);
+    displayStats();
 }
 
 
