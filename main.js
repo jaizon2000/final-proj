@@ -12,6 +12,7 @@ let history = document.getElementById('history');
 let lvl = 0;
 let str = 0;
 let killed = 0;
+let xp = 0;
 
 // TILE LOCATIONS LIST
 let flowerTiles = [];
@@ -23,11 +24,15 @@ let kingTiles = [];
 // HISTORY LIST
 let histList = [];
 
+// KNIGHT STUFF
+let knightImg = '<img id="knight" src="images/knight.png">';
+let giveSword = true;
 
 let walkerCol = 6;
 let walkerRow = 6;
-
 let walkerId = 'cell' + walkerCol + '-' + walkerRow;
+
+
 buildGrid();
 play();
 
@@ -53,7 +58,6 @@ function play() {
 
 // Functions //
 //---------- //
-// space bar event.keyCode == 32
 
 // Changes the display of Stats
 function displayStats() {
@@ -78,9 +82,12 @@ function reset() {
 function newMap() {
     // Remove Current Grid
     grid.innerHTML = '';
-
     // New Random Grid
     buildGrid();
+
+    // Reset Knight coordinates
+    walkerRow = 6;
+    walkerCol = 6;
 
     // Reset Tiles lists
     flowerTiles = [];
@@ -93,25 +100,74 @@ function newMap() {
     history.innerHTML = histList;
 }
 
+// DISPLAY IMG IN HISTORY
+function displayOnHistory(imgKey) {
+    let displayKey = '<div><img src="images/' + imgKey + '"></div>';
+    fixList(histList, displayKey);
+    // Display histList on web
+    history.innerHTML = histList.join('');
+}
 
+function replaceTile() {
+    let imgKey = 'grass_tile.png';
+
+    document.getElementById(walkerId).innerHTML = knightImg + "<img src='images/" + imgKey + "'>";
+
+}
 // ----------------- // 
 // KEY DOWN FUNCTION //
 // ----------------- //
 function keyDown(event) {
     let key = event.keyCode;
-    let displayKey = 'grass_tile.png';
     let imgKey = '';
 
-    // ENTER Key
-    if (key == 13) {
+    if (key == 13) { // ENTER Key
         let name = document.getElementById('name').value;
         console.log(name);
+
+    } else if (key == 32) { // SPACE key
+        // SLIMES
+        if (slimeTiles.includes(walkerId)) {
+            imgKey = "slime.png";
+            displayOnHistory(imgKey);
+
+        } else if (kingTiles.includes(walkerId)) {
+            imgKey = 'slime_king.png';
+            displayOnHistory(imgKey);
+        }
+        // -------------- END SLIME
+
+        // FLOWER TILE - Gives 1 heart
+        else if (flowerTiles.includes(walkerId)) {
+            imgKey = 'flower_tile.png';
+            displayOnHistory(imgKey);
+            replaceTile();
+        }
+
+        // BUSH TILE - Gives a sword
+        else if (bushTiles.includes(walkerId)) {
+            imgKey = 'bush_tile.png';
+            displayOnHistory(imgKey);
+            replaceTile();
+
+            let randSword = Math.random();
+            // if (randSword < 0.7) { // 70%
+
+            // } else if (randSword <0.9) { //20%
+
+            // } else if (randSword < 0.99) { // 9%
+
+            // } else { // 1%
+
+            // }
+        }
 
         // ARROW KEYS
     } else if (key == 38 || key == 39 || key == 40 || key == 37) { // UP, RIGHT, DOWN, LEFT
 
         if (key == 38) { // UP key
             imgKey = 'up_arrow.png';
+            displayOnHistory(imgKey);
 
             // FENCE BORDER CHECK
             if (walkerRow == 2) {
@@ -123,6 +179,7 @@ function keyDown(event) {
 
         } else if (key == 39) { // RIGHT key
             imgKey = 'right_arrow.png';
+            displayOnHistory(imgKey);
 
             // FENCE BORDER CHECK
             if (walkerCol == 11) {
@@ -134,6 +191,7 @@ function keyDown(event) {
 
         } else if (key == 40) { // DOWN key
             imgKey = 'down_arrow.png';
+            displayOnHistory(imgKey);
 
             // FENCE BORDER CHECK 
             if (walkerRow == 11) {
@@ -145,7 +203,7 @@ function keyDown(event) {
 
         } else if (key == 37) { //LEFT key
             imgKey = 'left_arrow.png';
-
+            displayOnHistory(imgKey);
             // FENCE BORDER CHECK
             if (walkerCol == 2) {
                 walkerCol == 2;
@@ -154,29 +212,20 @@ function keyDown(event) {
             }
             // ----------
         }
-
-        // DISPLAY IMG IN HISTORY
-        displayKey = '<div><img src="images/' + imgKey + '"></div>';
-
-        // DISPLAY KNIGHT
-        // Knight coordinate
-        walkerId = 'cell' + walkerCol + '-' + walkerRow;
-
+        // DISPLAY NEW KNIGHT ON GRID
         // Remove current Knight
         document.getElementById('knight').remove();
 
+        // Update walkerId to ne Knight coordinate
+        walkerId = 'cell' + walkerCol + '-' + walkerRow;
+
         // Add knight at walker id
         let knight = document.getElementById(walkerId);
-        knight.innerHTML = '<img id="knight" src="images/knight.png">' + knight.innerHTML;
-
-
-        fixList(histList, displayKey);
-        // Display histList on web
-        history.innerHTML = histList.join('');
-
+        knight.innerHTML = knightImg + knight.innerHTML;
     }
 }
 
+// 
 function fixList(histList, displayKey) {
     if (histList.length >= 12) {
         histList.shift(); // remove elem from beginning
@@ -196,6 +245,7 @@ function showHowTo() {
 function hideHowTo() {
     document.getElementById('how-to').classList.add('hide');
 }
+// -----------------
 
 
 // Build Random Grid
@@ -232,29 +282,27 @@ function buildGrid() {
                     tile = 'grass_tile.png';
                 } else if (randomTile < 0.91) { // 6%
                     tile = 'flower_tile.png';
-                    flowerTiles.push(col, row);
+                    flowerTiles.push("cell" + col + "-" + row);
 
                 } else if (randomTile < 0.95) { // 4%
                     tile = 'bush_tile.png';
-                    bushTiles.push(col, row);
+                    bushTiles.push("cell" + col + "-" + row);
 
                 } else if (randomTile < 0.98) { // 3%
                     tile = 'slime.png';
-                    slimeTiles.push(col, row);
+                    slimeTiles.push("cell" + col + "-" + row);
 
                 } else if (randomTile < 10) { // 2%
                     tile = 'slime_king.png';
-                    kingTiles.push(col, row);
+                    kingTiles.push("cell" + col + "-" + row);
                 }
             }
             grid.innerHTML += "<div id='" + id + "'><img src='images/" + tile + "'></div>";
 
             // INITIAL KNIGHT TILE
             if (row == 6 && col == 6) {
-                tile = 'knight.png';
-
                 let knight = document.getElementById('cell6-6');
-                knight.innerHTML = "<img id='knight' src='images/" + tile + "'>" + knight.innerHTML;
+                knight.innerHTML = knightImg + knight.innerHTML;
             }
 
         }

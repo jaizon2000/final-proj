@@ -26,6 +26,7 @@
         <!-- GAME -->
         <div id="grid-box">
             <div id="menu">
+                <!-- BUTTONS -->
                 <h4>buttons</h4>
                 <div><a href="index.html"><button>Home</button></a></div>
                 <div><button id='how-to-btn'>How To</button></div>
@@ -46,12 +47,13 @@
 
         <!-- HISTORY -->
         <div id="history">
+            <!-- USE JS to add History -->
         </div>
 
-        <!-- STATS -->
+        <!-- STATS TABLE-->
         <div id="stats">
             <h1>- Stats -</h1>
-            <!-- FIX CSS SINCE ITS DISPLAYED AS FLEX, USE TABLE INSTEAD -->
+            <!-- NAME -->
             <table id='tableName'>
                 <tr>
                     <th>NAME: </th>
@@ -60,8 +62,9 @@
                     <th><input id='name'></th>
                 </tr>
             </table>
-            <table>
 
+            <!-- STATS -->
+            <table>
                 <tr>
                     <th>LEVEL: </th>
                     <td><span id="lvl">0</span></td>
@@ -78,7 +81,16 @@
                     <td><span id='killed'>0</span></td>
                 </tr>
 
+                <tr>
+                    <th>WEAPON: </th>
+                    <td><img id='sword' src='images/sword1.png'></td>
+                </tr>
+                <tr>
+                    <th colspan="2"><progress id='xp' value="50" min="0" max="100"></progress></th>
+                </tr>
+
             </table>
+
         </div>
 
         <!-- BUTTONS -->

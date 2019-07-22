@@ -37,8 +37,7 @@ html {
 
 
 #play-page,
-#grid-box,
-#history {
+#grid-box {
     width: 386px;
     /* size of grid, etc */
 
@@ -50,6 +49,9 @@ html {
     border: 2px solid rgb(44, 14, 78);
 
 
+}
+#grid-box {
+    line-height: 10px;
 }
 
 
@@ -64,7 +66,7 @@ html {
     left: 450px;
     /* ---  
     define a width&height or it'll use the whole page & won't center*/
-    height: 520px;
+    height: 470px;
 
 }
 
@@ -130,26 +132,33 @@ div>h1 {
     top: 0;
     padding: 0 25px;
     margin: 0 25px;
-
 }
-
+progress {
+    width: 100%;
+    height: 5px;
+    background-color: none;
+}
 table {
     border-collapse: separate;
     border-spacing: 0 20px;
 }
+
 table#tableName {
     border-collapse: separate;
     border-spacing: 0 10px;
 }
+
 th {
     text-align: left;
 }
+
 td {
     text-align: right;
     width: 200px;
     font-size: 40px;
     vertical-align: middle;
 }
+
 /* table,
 tr,
 td {
@@ -163,15 +172,17 @@ td {
     background-color: #32343D;
     scroll-behavior: smooth;
     height: 32px;
-
-    overflow: hidden;
+    width: 383.5px;
     /* Hide scroll bars */
-    display: flex;
+    overflow: hidden;
     /* Displays all in one line */
-    flex-direction: row-reverse;
+    display: flex;
     /* 1 2 3 ==> 3 2 1 */
-    direction: rtl;
+    flex-direction: row-reverse;
     /* Determines where new img appear (rtl = new img appear on most left */
+    direction: rtl;
+    margin-left: 1px;
+
 
 }
 
