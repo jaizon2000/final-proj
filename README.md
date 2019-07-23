@@ -59,3 +59,4 @@ knight.png - https://bit.ly/2Sko7Kx
 
 * **Access *img src* from js** - https://is.gd/eZMyhs
 * **Display vs Visibility (CSS)** - https://bit.ly/2Sy9XWo
+* How I fixed tile overlay- https://is.gd/sRcLuR

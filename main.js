@@ -7,12 +7,15 @@
 let grid = document.getElementById('grid');
 let history = document.getElementById('history');
 
-
 // STATS
 let lvl = 0;
 let str = 0;
 let killed = 0;
 let xp = 0;
+
+let life = document.getElementById('life');
+let heart = '<img src="images/heart.png">';
+
 
 // TILE LOCATIONS LIST
 let flowerTiles = [];
@@ -33,11 +36,15 @@ let walkerCol = 6;
 let walkerRow = 6;
 let walkerId = 'cell' + walkerCol + '-' + walkerRow;
 
-
+for(let x=1; x<=10; x++){
+    life.innerHTML += heart;
+}
 
 buildGrid();
 play();
+
 let imgHTML = document.getElementById(walkerId).getElementsByTagName('img');
+
 
 // --- PLAY.HTML --- //
 function play() {
@@ -64,7 +71,7 @@ function play() {
 // Changes the display of Stats
 function displayStats() {
     document.getElementById('lvl').innerHTML = lvl;
-    document.getElementById('grid-lvl').innerHTML = lvl;
+    // document.getElementById('grid-lvl').innerHTML = lvl;
     document.getElementById('str').innerHTML = str;
     document.getElementById('killed').innerHTML = killed;
 }
