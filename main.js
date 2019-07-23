@@ -19,14 +19,14 @@ let flowerTiles = [];
 let bushTiles = [];
 let slimeTiles = [];
 let kingTiles = [];
-// let grassTiles = [];
+let swordTiles = [];
 
 // HISTORY LIST
 let histList = [];
 
 // KNIGHT STUFF
 let knightImg = '<img id="knight" src="images/knight.png">';
-let giveSword = true;
+let sword = 'type of sword';
 
 let walkerCol = 6;
 let walkerRow = 6;
@@ -69,22 +69,17 @@ function displayStats() {
 
 // RESET GAME
 function reset() {
-    newMap();
-
     // Reset Stats
     lvl = 0;
     str = 0;
     killed = 0;
     displayStats();
+
+    newMap();
 }
 
 // BUILD NEW MAP
 function newMap() {
-    // Remove Current Grid
-    grid.innerHTML = '';
-    // New Random Grid
-    buildGrid();
-
     // Reset Knight coordinates
     walkerRow = 6;
     walkerCol = 6;
@@ -94,10 +89,16 @@ function newMap() {
     bushTiles = [];
     slimeTiles = [];
     kingTiles = [];
+    swordTiles = [];
 
     // Reset History
     histList = [];
     history.innerHTML = histList;
+
+    // Remove Current Grid
+    grid.innerHTML = '';
+    // New Random Grid
+    buildGrid();
 }
 
 // DISPLAY IMG IN HISTORY
@@ -111,8 +112,26 @@ function displayOnHistory(imgKey) {
 function replaceTile() {
     let imgKey = 'grass_tile.png';
 
-    document.getElementById(walkerId).innerHTML = knightImg + "<img src='images/" + imgKey + "'>";
-
+    // REPLACE TILE WITH A SWORD
+    if (getSword == true) {
+        let randSword = Math.random();
+        console.log(randSword)
+        if (randSword < 0.7) { // 70%
+            imgKey = 'sword1.png';
+        } else if (randSword < 0.9) { //20%
+            imgKey = 'sword2.png';
+        } else if (randSword < 0.99) { // 9%
+            imgKey = 'sword3.png';
+        } else { // 1%
+            imgKey = 'sword-extra.png';
+        }
+        // Replace Tile
+        document.getElementById(walkerId).innerHTML = knightImg + "<img src='images/" + imgKey + "' width='16px'>";
+        // Put sword coord in array
+        swordTiles.push(walkerId);
+    } else {
+        document.getElementById(walkerId).innerHTML = knightImg + "<img src='images/" + imgKey + "'>";
+    }
 }
 // ----------------- // 
 // KEY DOWN FUNCTION //
@@ -121,19 +140,30 @@ function keyDown(event) {
     let key = event.keyCode;
     let imgKey = '';
 
+
     if (key == 13) { // ENTER Key
         let name = document.getElementById('name').value;
         console.log(name);
 
     } else if (key == 32) { // SPACE key
+        // Prevent space key from clicking button
+        window.event || event;
+        event.preventDefault();
+
         // SLIMES
         if (slimeTiles.includes(walkerId)) {
             imgKey = "slime.png";
             displayOnHistory(imgKey);
 
+            // Remove from array after death
+            slimeTiles.splice(slimeTiles.indexOf(walkerId), 1);
+
         } else if (kingTiles.includes(walkerId)) {
             imgKey = 'slime_king.png';
             displayOnHistory(imgKey);
+
+            // Remove from array after death
+            kingTiles.splice(kingTiles.indexOf(walkerId), 1);
         }
         // -------------- END SLIME
 
@@ -142,25 +172,31 @@ function keyDown(event) {
             imgKey = 'flower_tile.png';
             displayOnHistory(imgKey);
             replaceTile();
+            // Remove from array
+            flowerTiles.splice(flowerTiles.indexOf(walkerId), 1);
         }
+        //----------------- END FLOWER TILE
 
         // BUSH TILE - Gives a sword
         else if (bushTiles.includes(walkerId)) {
             imgKey = 'bush_tile.png';
             displayOnHistory(imgKey);
+
+            let getSword = true;
             replaceTile();
+            getSword = false;
 
-            let randSword = Math.random();
-            // if (randSword < 0.7) { // 70%
-
-            // } else if (randSword <0.9) { //20%
-
-            // } else if (randSword < 0.99) { // 9%
-
-            // } else { // 1%
-
-            // }
+            // Remove from array
+            bushTiles.splice(bushTiles.indexOf(walkerId), 1);
         }
+        //----------------- END BUSH TILE
+
+        // SWORD TILE
+        else if (swordTiles.includes(walkerId)) {
+            document.getElementById('sword').src = ;
+        }
+        //----------------- END SWORD TILE
+
 
         // ARROW KEYS
     } else if (key == 38 || key == 39 || key == 40 || key == 37) { // UP, RIGHT, DOWN, LEFT
