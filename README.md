@@ -57,3 +57,5 @@ knight.png - https://bit.ly/2Sko7Kx
     + https://is.gd/RHv7Sz
     + https://is.gd/kagjdf
 
+* **Access *img src* from js** - https://is.gd/eZMyhs
+* **Display vs Visibility (CSS)** - https://bit.ly/2Sy9XWo

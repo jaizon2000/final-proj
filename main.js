@@ -27,15 +27,17 @@ let histList = [];
 // KNIGHT STUFF
 let knightImg = '<img id="knight" src="images/knight.png">';
 let sword = 'type of sword';
+let getSword = false;
 
 let walkerCol = 6;
 let walkerRow = 6;
 let walkerId = 'cell' + walkerCol + '-' + walkerRow;
 
 
+
 buildGrid();
 play();
-
+let imgHTML = document.getElementById(walkerId).getElementsByTagName('img');
 
 // --- PLAY.HTML --- //
 function play() {
@@ -125,8 +127,8 @@ function replaceTile() {
         } else { // 1%
             imgKey = 'sword-extra.png';
         }
-        // Replace Tile
-        document.getElementById(walkerId).innerHTML = knightImg + "<img src='images/" + imgKey + "' width='16px'>";
+        // Replace Tile w/ sword
+        document.getElementById(walkerId).innerHTML = knightImg + "<img src='images/" + imgKey + "'>";
         // Put sword coord in array
         swordTiles.push(walkerId);
     } else {
@@ -139,7 +141,6 @@ function replaceTile() {
 function keyDown(event) {
     let key = event.keyCode;
     let imgKey = '';
-
 
     if (key == 13) { // ENTER Key
         let name = document.getElementById('name').value;
@@ -181,26 +182,28 @@ function keyDown(event) {
         else if (bushTiles.includes(walkerId)) {
             imgKey = 'bush_tile.png';
             displayOnHistory(imgKey);
-
-            let getSword = true;
+            
+            getSword = true;
             replaceTile();
             getSword = false;
 
-            // Remove from array
+            // Remove Bush from array
             bushTiles.splice(bushTiles.indexOf(walkerId), 1);
         }
         //----------------- END BUSH TILE
 
         // SWORD TILE
         else if (swordTiles.includes(walkerId)) {
-            document.getElementById('sword').src = ;
+            // Gets img src of sword at current tile
+            let e = document.getElementById(walkerId).getElementsByTagName('img')[1];
+            document.getElementById('sword').src = e.src;
         }
         //----------------- END SWORD TILE
 
 
         // ARROW KEYS
     } else if (key == 38 || key == 39 || key == 40 || key == 37) { // UP, RIGHT, DOWN, LEFT
-
+        
         if (key == 38) { // UP key
             imgKey = 'up_arrow.png';
             displayOnHistory(imgKey);
@@ -258,10 +261,13 @@ function keyDown(event) {
         // Add knight at walker id
         let knight = document.getElementById(walkerId);
         knight.innerHTML = knightImg + knight.innerHTML;
+        
+        
     }
 }
 
-// 
+
+// FIX HISTORY LIST
 function fixList(histList, displayKey) {
     if (histList.length >= 12) {
         histList.shift(); // remove elem from beginning
@@ -271,8 +277,7 @@ function fixList(histList, displayKey) {
         histList.push(displayKey); // add elem at end
     }
 }
-
-
+// ----------------
 // HIDE & SHOW HOW TO
 function showHowTo() {
     document.getElementById('how-to').classList.remove('hide');
@@ -281,7 +286,7 @@ function showHowTo() {
 function hideHowTo() {
     document.getElementById('how-to').classList.add('hide');
 }
-// -----------------
+// ----------------- HIDE & SHOW HOW TO
 
 
 // Build Random Grid
