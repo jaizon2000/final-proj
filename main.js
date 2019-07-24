@@ -122,8 +122,8 @@ function displayStats() {
 function reset() {
     // Reset Stats
     lvl = 0;
-    first_str = 1;
-    str = 0;
+    str = 1;
+    atk = 0;
     killed = 0;
     expBar.value = 0;
 
