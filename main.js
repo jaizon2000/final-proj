@@ -14,7 +14,7 @@ let killed = 0;
 let xp = 0;
 
 let life = document.getElementById('life');
-let heart = '<img src="images/heart.png">';
+let heart = '<img src="images/heart.png"><br>';
 
 
 // TILE LOCATIONS LIST
@@ -36,15 +36,9 @@ let walkerCol = 6;
 let walkerRow = 6;
 let walkerId = 'cell' + walkerCol + '-' + walkerRow;
 
-for(let x=1; x<=10; x++){
-    life.innerHTML += heart;
-}
-
 buildGrid();
+drawHearts();
 play();
-
-let imgHTML = document.getElementById(walkerId).getElementsByTagName('img');
-
 
 // --- PLAY.HTML --- //
 function play() {
@@ -67,11 +61,15 @@ function play() {
 
 // Functions //
 //---------- //
-
+function drawHearts() {
+    // Draw hearts
+    for (let x = 1; x <= 10; x++) {
+        life.innerHTML += heart;
+    }
+}
 // Changes the display of Stats
 function displayStats() {
     document.getElementById('lvl').innerHTML = lvl;
-    // document.getElementById('grid-lvl').innerHTML = lvl;
     document.getElementById('str').innerHTML = str;
     document.getElementById('killed').innerHTML = killed;
 }
@@ -83,6 +81,10 @@ function reset() {
     str = 0;
     killed = 0;
     displayStats();
+
+    // Reset Hearts
+    document.getElementById('life').innerHTML = '';
+    drawHearts();
 
     newMap();
 }
@@ -138,8 +140,10 @@ function replaceTile() {
         document.getElementById(walkerId).innerHTML = knightImg + "<img src='images/" + imgKey + "'>";
         // Put sword coord in array
         swordTiles.push(walkerId);
+        sword = imgKey;
     } else {
         document.getElementById(walkerId).innerHTML = knightImg + "<img src='images/" + imgKey + "'>";
+        sword = 'sword1.png';
     }
 }
 // ----------------- // 
@@ -189,7 +193,7 @@ function keyDown(event) {
         else if (bushTiles.includes(walkerId)) {
             imgKey = 'bush_tile.png';
             displayOnHistory(imgKey);
-            
+
             getSword = true;
             replaceTile();
             getSword = false;
@@ -202,15 +206,24 @@ function keyDown(event) {
         // SWORD TILE
         else if (swordTiles.includes(walkerId)) {
             // Gets img src of sword at current tile
-            let e = document.getElementById(walkerId).getElementsByTagName('img')[1];
-            document.getElementById('sword').src = e.src;
+            let imgHTML = document.getElementById(walkerId).getElementsByTagName('img');
+            let imgKey = sword;
+            // console.log(imgHTML[1].src)
+            // CHANGE WEAPON IMG with sword at current tile
+            document.getElementById('sword').src = imgHTML[1].src;
+            displayOnHistory(imgKey);
+
+            // REPLACE SWORD TILE --> GRASS
+            replaceTile();
+            // REMOVE FROM swordTiles array
+            swordTiles.splice(swordTiles.indexOf(walkerId), 1);
         }
         //----------------- END SWORD TILE
 
 
         // ARROW KEYS
     } else if (key == 38 || key == 39 || key == 40 || key == 37) { // UP, RIGHT, DOWN, LEFT
-        
+
         if (key == 38) { // UP key
             imgKey = 'up_arrow.png';
             displayOnHistory(imgKey);
@@ -266,10 +279,10 @@ function keyDown(event) {
         walkerId = 'cell' + walkerCol + '-' + walkerRow;
 
         // Add knight at walker id
-        let knight = document.getElementById(walkerId);
-        knight.innerHTML = knightImg + knight.innerHTML;
-        
-        
+        let currentTile = document.getElementById(walkerId);
+        currentTile.innerHTML = knightImg + currentTile.innerHTML;
+
+
     }
 }
 
@@ -296,9 +309,12 @@ function hideHowTo() {
 // ----------------- HIDE & SHOW HOW TO
 
 
-// Build Random Grid
+// Build Random Grid //
+// ----------------- //
 function buildGrid() {
     let tile = 'fence_tl_tile.png';
+
+    
 
     for (let row = 1; row <= 12; row++) { // y
         for (let col = 1; col <= 12; col++) { // x
@@ -349,8 +365,8 @@ function buildGrid() {
 
             // INITIAL KNIGHT TILE
             if (row == 6 && col == 6) {
-                let knight = document.getElementById('cell6-6');
-                knight.innerHTML = knightImg + knight.innerHTML;
+                let currentTile = document.getElementById('cell6-6');
+                currentTile.innerHTML = knightImg + currentTile.innerHTML;
             }
 
         }
