@@ -21,7 +21,9 @@ knight.png - https://bit.ly/2Sko7Kx
  * **HTML TABLES** - https://www.w3schools.com/html/html_tables.asp
  * **CSS Selectors** - https://bit.ly/2SghGbi 
  * **Remove scrollbars** - https://bit.ly/2SkpZmx
- * **Perfect Centering** - https://bit.ly/2xRvoYQ
+ * **Perfect Centering**:
+    + https://bit.ly/2xRvoYQ
+    + https://is.gd/aLsKOZ
  * **More Centering**:
     + http://www.tipue.com/blog/center-a-div/
     + https://www.w3.org/Style/Examples/007/center.en.html

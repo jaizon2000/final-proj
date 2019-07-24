@@ -8,13 +8,16 @@ let grid = document.getElementById('grid');
 let history = document.getElementById('history');
 
 // STATS
+
 let lvl = 0;
 let str = 0;
 let killed = 0;
-let xp = 0;
+let exp = 0;
 let life = document.getElementById('life');
 let health = [];
 let heart = '<img src="images/heart.png"><br>';
+let atk = 0;
+
 
 
 // TILE LOCATIONS LIST
@@ -29,7 +32,7 @@ let histList = [];
 
 // KNIGHT STUFF
 let knightImg = '<img id="knight" src="images/knight.png">';
-let sword = 'sword imgKey';
+let sword = 'sword tile';
 let getSword = false;
 
 let walkerCol = 6;
@@ -69,14 +72,14 @@ function play() {
 function drawHearts() {
     // Draw hearts
     if (health.length < 1) {
-       console.log('dead')
+        console.log('dead')
     }
     life.innerHTML = health.join('');
 }
 // Changes the display of Stats
 function displayStats() {
     document.getElementById('lvl').innerHTML = lvl;
-    document.getElementById('str').innerHTML = str;
+    document.getElementById('str').innerHTML = str+atk;
     document.getElementById('killed').innerHTML = killed;
 }
 
@@ -127,45 +130,66 @@ function newMap() {
 }
 
 // DISPLAY IMG IN HISTORY
-function displayOnHistory(imgKey) {
-    let displayKey = '<div><img src="images/' + imgKey + '"></div>';
+function displayOnHistory(tile) {
+    let displayKey = '<div><img src="images/' + tile + '"></div>';
     fixList(histList, displayKey);
     // Display histList on web
     history.innerHTML = histList.join('');
 }
 
 function replaceTile() {
-    let imgKey = 'grass_tile.png';
+    let tile = 'grass_tile.png';
 
     // REPLACE TILE WITH A SWORD
     if (getSword == true) {
         let randSword = Math.random();
         console.log(randSword)
-        if (randSword < 0.7) { // 70%
-            imgKey = 'sword1.png';
-        } else if (randSword < 0.9) { //20%
-            imgKey = 'sword2.png';
-        } else if (randSword < 0.99) { // 9%
-            imgKey = 'sword3.png';
-        } else { // 1%
-            imgKey = 'sword-extra.png';
+        if (randSword < 0.75) { // 75%
+            tile = 'sword1.png';
+        } else if (randSword < 0.95) { //15%
+            tile = 'sword2.png';
+        } else if (randSword < 0.998) { // 9%
+            tile = 'sword3.png';
+        } else { // 0.2%
+            tile = 'sword-extra.png';
         }
         // Replace Tile w/ sword
-        document.getElementById(walkerId).innerHTML = knightImg + "<img src='images/" + imgKey + "'>";
+        document.getElementById(walkerId).innerHTML = knightImg + "<img src='images/" + tile + "'>";
         // Put sword coord in array
         swordTiles.push(walkerId);
-        sword = imgKey;
+        sword = tile;
     } else {
-        document.getElementById(walkerId).innerHTML = knightImg + "<img src='images/" + imgKey + "'>";
+        document.getElementById(walkerId).innerHTML = knightImg + "<img src='images/" + tile + "'>";
         sword = 'sword1.png';
     }
+}
+
+function updateExp(tile) {
+    let expBar = document.getElementById('exp');
+    // GAIN EXP
+    if (tile == 'slime.png') {
+        exp = 1;
+        expBar.value += exp;
+    } else if(tile == 'slime_king.png') {
+        exp = 3;
+        expBar.value += exp;
+    }
+
+    // GAIN A LEVEL
+    if (expBar.value >= 100) {
+        lvl++;
+        displayStats();
+        displayOnHistory('lvlup.png')
+        expBar.value = 0;
+    }
+
 }
 // ----------------- // 
 // KEY DOWN FUNCTION //
 // ----------------- //
 function keyDown(event) {
     let key = event.keyCode;
-    let imgKey = '';
+    let tile = 'this is a tile';
 
     if (key == 13) { // ENTER Key
         let name = document.getElementById('name').value;
@@ -178,27 +202,44 @@ function keyDown(event) {
 
         // SLIMES
         if (slimeTiles.includes(walkerId)) {
-            imgKey = "slime.png";
-            displayOnHistory(imgKey);
+            tile = "slime.png";
+            displayOnHistory(tile);
 
-            // Remove hearts
+            // Remove Player hearts
             health.pop();
             drawHearts();
 
+            // AFTER KILLED
+            // Add to killed counter
+            killed++;
+            // Increase str
+            str++;
+            displayStats();
+
+            // Add exp
+            updateExp(tile);
             // Remove from array after death
             // slimeTiles.splice(slimeTiles.indexOf(walkerId), 1);
             // Replace SLIME tile --> GRASS 
         }
         // KING SLIMES
         else if (kingTiles.includes(walkerId)) {
-            imgKey = 'slime_king.png';
-            displayOnHistory(imgKey);
+            tile = 'slime_king.png';
+            displayOnHistory(tile);
 
-            // Remove Hearts
-            // at index 0, remove 2 elems
+            // Remove Player Hearts
+            // at index 0, remove 2 hearts
             health.splice(0, 2)
             drawHearts();
 
+            // AFTER KILLED
+            // Add to killed counter
+            killed++;
+            // Increase str
+            str++;
+            // Add exp
+            updateExp(tile);
+            displayStats();
             // Remove from array after death
             // kingTiles.splice(kingTiles.indexOf(walkerId), 1);
             // Replace SLIME tile --> GRASS
@@ -207,8 +248,8 @@ function keyDown(event) {
 
         // FLOWER TILE - Gives 1 heart
         else if (flowerTiles.includes(walkerId)) {
-            imgKey = 'flower_tile.png';
-            displayOnHistory(imgKey);
+            tile = 'flower_tile.png';
+            displayOnHistory(tile);
             replaceTile();
             // Remove from array
             flowerTiles.splice(flowerTiles.indexOf(walkerId), 1);
@@ -223,8 +264,8 @@ function keyDown(event) {
 
         // BUSH TILE - Gives a sword
         else if (bushTiles.includes(walkerId)) {
-            imgKey = 'bush_tile.png';
-            displayOnHistory(imgKey);
+            tile = 'bush_tile.png';
+            displayOnHistory(tile);
 
             getSword = true;
             replaceTile();
@@ -239,11 +280,21 @@ function keyDown(event) {
         else if (swordTiles.includes(walkerId)) {
             // Gets img src of sword at current tile
             let imgHTML = document.getElementById(walkerId).getElementsByTagName('img');
-            let imgKey = sword;
-            // console.log(imgHTML[1].src)
+
+            if (sword == 'sword1.png') {
+                atk = 1;
+            } else if ('sword2.png') {
+                atk = 5;
+            } else if ('sword3.png') {
+                atk = 8;
+            } else if ('sword-extra.png') {
+                atk = 1000;
+            }
+            displayStats();
+
             // CHANGE WEAPON IMG with sword at current tile
             document.getElementById('sword').src = imgHTML[1].src;
-            displayOnHistory(imgKey);
+            displayOnHistory(sword);
 
             // REPLACE SWORD TILE --> GRASS
             replaceTile();
@@ -257,8 +308,8 @@ function keyDown(event) {
     } else if (key == 38 || key == 39 || key == 40 || key == 37) { // UP, RIGHT, DOWN, LEFT
 
         if (key == 38) { // UP key
-            imgKey = 'up_arrow.png';
-            displayOnHistory(imgKey);
+            tile = 'up_arrow.png';
+            displayOnHistory(tile);
 
             // FENCE BORDER CHECK
             if (walkerRow == 2) {
@@ -269,8 +320,8 @@ function keyDown(event) {
             // ----------
 
         } else if (key == 39) { // RIGHT key
-            imgKey = 'right_arrow.png';
-            displayOnHistory(imgKey);
+            tile = 'right_arrow.png';
+            displayOnHistory(tile);
 
             // FENCE BORDER CHECK
             if (walkerCol == 11) {
@@ -281,8 +332,8 @@ function keyDown(event) {
             // ----------
 
         } else if (key == 40) { // DOWN key
-            imgKey = 'down_arrow.png';
-            displayOnHistory(imgKey);
+            tile = 'down_arrow.png';
+            displayOnHistory(tile);
 
             // FENCE BORDER CHECK 
             if (walkerRow == 11) {
@@ -293,8 +344,8 @@ function keyDown(event) {
             // ----------
 
         } else if (key == 37) { //LEFT key
-            imgKey = 'left_arrow.png';
-            displayOnHistory(imgKey);
+            tile = 'left_arrow.png';
+            displayOnHistory(tile);
             // FENCE BORDER CHECK
             if (walkerCol == 2) {
                 walkerCol == 2;
