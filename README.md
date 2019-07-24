@@ -39,7 +39,9 @@ knight.png - https://bit.ly/2Sko7Kx
             + https://davidwalsh.name/remove-item-array-javascript
             + https://www.w3schools.com/jsref/jsref_splice.asp
 --------------
- * **Document Objects** - https://www.w3schools.com/js/js_htmldom_document.asp (document.)
+ * **Document Objects**:
+    + https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects
+    + https://www.w3schools.com/js/js_htmldom_document.asp (document.)
  * **addEventListener events**:
     + https://developer.mozilla.org/en-US/docs/Web/Events
     +  **HTML DOM events list** - https://www.w3schools.com/jsref/dom_obj_event.asp

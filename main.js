@@ -6,21 +6,40 @@
 // ----------- //
 let grid = document.getElementById('grid');
 let history = document.getElementById('history');
+let expBar = document.getElementById('exp');
+
 
 // STATS
+let user = {
+    lvl: 10,
+    str: 0,
+    killed: 0,
+    exp: 0,
+    health: [],
+};
 
 let lvl = 0;
-let str = 0;
+let atk = 0;
+let str = 1;
+
+
 let killed = 0;
 let exp = 0;
 let life = document.getElementById('life');
 let health = [];
 let heart = '<img src="images/heart.png"><br>';
-let atk = 0;
 
 
 
 // TILE LOCATIONS LIST
+let tiles = {
+    flower: [],
+    bush: [],
+    slime: [],
+    king: [],
+    sword: []
+};
+
 let flowerTiles = [];
 let bushTiles = [];
 let slimeTiles = [];
@@ -35,10 +54,26 @@ let knightImg = '<img id="knight" src="images/knight.png">';
 let sword = 'sword tile';
 let getSword = false;
 
+
+let walker = {
+    col: 6,
+    row: 6,
+};
+
 let walkerCol = 6;
 let walkerRow = 6;
 let walkerId = 'cell' + walkerCol + '-' + walkerRow;
 
+// SLIME
+let slime = {
+    life: 4,
+    atk: 1
+};
+
+let kingSlime = {
+    life: 10,
+    atk: 2
+}
 // Draw Hearts
 for (let x = 1; x <= 10; x++) {
     health.push(heart);
@@ -79,7 +114,7 @@ function drawHearts() {
 // Changes the display of Stats
 function displayStats() {
     document.getElementById('lvl').innerHTML = lvl;
-    document.getElementById('str').innerHTML = str+atk;
+    document.getElementById('str').innerHTML = str;
     document.getElementById('killed').innerHTML = killed;
 }
 
@@ -87,8 +122,11 @@ function displayStats() {
 function reset() {
     // Reset Stats
     lvl = 0;
+    first_str = 1;
     str = 0;
     killed = 0;
+    expBar.value = 0;
+
     displayStats();
 
     // Reset Hearts
@@ -137,6 +175,7 @@ function displayOnHistory(tile) {
     history.innerHTML = histList.join('');
 }
 
+// REPLACE CURRENT TILE --> GRASS
 function replaceTile() {
     let tile = 'grass_tile.png';
 
@@ -145,32 +184,32 @@ function replaceTile() {
         let randSword = Math.random();
         console.log(randSword)
         if (randSword < 0.75) { // 75%
-            tile = 'sword1.png';
+            sword = 'sword1.png';
         } else if (randSword < 0.95) { //15%
-            tile = 'sword2.png';
+            sword = 'sword2.png';
         } else if (randSword < 0.998) { // 9%
-            tile = 'sword3.png';
+            sword = 'sword3.png';
         } else { // 0.2%
-            tile = 'sword-extra.png';
+            sword = 'sword-extra.png';
         }
         // Replace Tile w/ sword
-        document.getElementById(walkerId).innerHTML = knightImg + "<img src='images/" + tile + "'>";
+        document.getElementById(walkerId).innerHTML = knightImg + "<img src='images/" + sword + "'>";
         // Put sword coord in array
         swordTiles.push(walkerId);
-        sword = tile;
+        // sword = tile;
     } else {
         document.getElementById(walkerId).innerHTML = knightImg + "<img src='images/" + tile + "'>";
         sword = 'sword1.png';
     }
 }
 
+// GAINS EXP
 function updateExp(tile) {
-    let expBar = document.getElementById('exp');
     // GAIN EXP
     if (tile == 'slime.png') {
         exp = 1;
         expBar.value += exp;
-    } else if(tile == 'slime_king.png') {
+    } else if (tile == 'slime_king.png') {
         exp = 3;
         expBar.value += exp;
     }
@@ -184,14 +223,62 @@ function updateExp(tile) {
     }
 
 }
+
+function startBattle(tile) {
+    if (tile == 'slime.png') {
+        // Remove enemy hearts
+        slime.life -= str;
+        // Remove 1 Player heart
+        health.splice(0, slime.atk);
+        drawHearts();
+
+        // Enemy Dies
+        if (slime.life <= 0) {
+            // Add to killed counter
+            killed++;
+
+            // Add exp
+            updateExp(tile);
+
+            // Remove from array after death
+            slimeTiles.splice(slimeTiles.indexOf(walkerId), 1);
+            // Replace SLIME tile --> GRASS 
+            replaceTile();
+        }
+    } else if (tile == 'slime_king.png') {
+        // Remove enemy Hearts
+        kingSlime.life -= str;
+        // Remove 2 Player Hearts
+        health.splice(0, kingSlime.atk)
+        drawHearts();
+
+        // Enemy Dies
+        if (kingSlime.life <= 0) {
+            // Add to killed counter
+            killed++;
+
+            // Add exp
+            updateExp(tile);
+
+            // Remove from array after death
+            kingTiles.splice(kingTiles.indexOf(walkerId), 1);
+            // Replace SLIME tile --> GRASS 
+            replaceTile();
+        }
+    }
+    // Display stats on stats box
+    displayStats();
+
+}
 // ----------------- // 
 // KEY DOWN FUNCTION //
 // ----------------- //
 function keyDown(event) {
     let key = event.keyCode;
     let tile = 'this is a tile';
-
-    if (key == 13) { // ENTER Key
+    if (key == 78) { // 'n' Key
+        newMap();
+    } else if (key == 13) { // ENTER Key
         let name = document.getElementById('name').value;
         console.log(name);
 
@@ -200,49 +287,23 @@ function keyDown(event) {
         window.event || event;
         event.preventDefault();
 
-        // SLIMES
+        // SLIMES //
         if (slimeTiles.includes(walkerId)) {
             tile = "slime.png";
             displayOnHistory(tile);
 
-            // Remove Player hearts
-            health.pop();
-            drawHearts();
-
-            // AFTER KILLED
-            // Add to killed counter
-            killed++;
-            // Increase str
-            str++;
-            displayStats();
-
-            // Add exp
-            updateExp(tile);
-            // Remove from array after death
-            // slimeTiles.splice(slimeTiles.indexOf(walkerId), 1);
-            // Replace SLIME tile --> GRASS 
+            // Interaction b/w enemy and player
+            startBattle(tile);
         }
         // KING SLIMES
         else if (kingTiles.includes(walkerId)) {
             tile = 'slime_king.png';
             displayOnHistory(tile);
 
-            // Remove Player Hearts
-            // at index 0, remove 2 hearts
-            health.splice(0, 2)
-            drawHearts();
+            // Interaction b/w enemy and player
+            startBattle(tile);
 
-            // AFTER KILLED
-            // Add to killed counter
-            killed++;
-            // Increase str
-            str++;
-            // Add exp
-            updateExp(tile);
-            displayStats();
-            // Remove from array after death
-            // kingTiles.splice(kingTiles.indexOf(walkerId), 1);
-            // Replace SLIME tile --> GRASS
+
         }
         // -------------- END SLIME
 
@@ -280,16 +341,18 @@ function keyDown(event) {
         else if (swordTiles.includes(walkerId)) {
             // Gets img src of sword at current tile
             let imgHTML = document.getElementById(walkerId).getElementsByTagName('img');
-
+            let swordAtk = 1;
+            // CHANGE STR depending on sword
             if (sword == 'sword1.png') {
-                atk = 1;
-            } else if ('sword2.png') {
-                atk = 5;
-            } else if ('sword3.png') {
-                atk = 8;
-            } else if ('sword-extra.png') {
-                atk = 1000;
+                swordAtk = 1
+            } else if (sword == 'sword2.png') {
+                swordAtk = 5;
+            } else if (sword == 'sword3.png') {
+                swordAtk = 8;
+            } else if (sword == 'sword-extra.png') {
+                swordAtk = 1000;
             }
+            str = atk + swordAtk;
             displayStats();
 
             // CHANGE WEAPON IMG with sword at current tile
@@ -306,6 +369,9 @@ function keyDown(event) {
 
         // ARROW KEYS
     } else if (key == 38 || key == 39 || key == 40 || key == 37) { // UP, RIGHT, DOWN, LEFT
+        // Restart enemy life on move
+        slime.life = 4;
+        kingSlime.life = 10;
 
         if (key == 38) { // UP key
             tile = 'up_arrow.png';

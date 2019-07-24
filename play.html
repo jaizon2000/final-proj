@@ -4,6 +4,7 @@
 <head>
     <title>The ConQuest</title>
     <link rel="stylesheet" type="text/css" href="style_play.css">
+    <link href="https://fonts.googleapis.com/css?family=VT323&display=swap" rel="stylesheet">
 </head>
 
 <body>
@@ -13,6 +14,7 @@
         <p>Type a name and press enter</p>
         <p>Use arrow keys to move</p>
         <p>Space to attack</p>
+        <p>Press New Map or 'n' to get a new map</p>
         <p>Press the Reset button to get:
             <ul>
                 <li>a new randomized map</li>
@@ -39,7 +41,7 @@
                 <!-- <h5>Grid</h5> -->
                 <!-- Use Javascript to add grid -->
             </div>
-            
+
             <!-- HEARTS ON GRID -->
             <div id="grid-stats">
                 <div id="life">
@@ -76,7 +78,7 @@
 
                 <tr>
                     <th>STR: </th>
-                    <td><span id='str'>0</span></td>
+                    <td><span id='str'>1</span></td>
                 </tr>
 
                 <tr>
@@ -89,6 +91,7 @@
                     <td><img id='sword' src='images/sword1.png'></td>
                 </tr>
                 <tr>
+                    <th>EXP:</th>
                     <th colspan="2"><progress id='exp' value="99" min="0" max="100"></progress></th>
                 </tr>
 
