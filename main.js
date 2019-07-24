@@ -12,8 +12,8 @@ let lvl = 0;
 let str = 0;
 let killed = 0;
 let xp = 0;
-
 let life = document.getElementById('life');
+let health = [];
 let heart = '<img src="images/heart.png"><br>';
 
 
@@ -29,15 +29,20 @@ let histList = [];
 
 // KNIGHT STUFF
 let knightImg = '<img id="knight" src="images/knight.png">';
-let sword = 'type of sword';
+let sword = 'sword imgKey';
 let getSword = false;
 
 let walkerCol = 6;
 let walkerRow = 6;
 let walkerId = 'cell' + walkerCol + '-' + walkerRow;
 
-buildGrid();
+// Draw Hearts
+for (let x = 1; x <= 10; x++) {
+    health.push(heart);
+}
 drawHearts();
+
+buildGrid();
 play();
 
 // --- PLAY.HTML --- //
@@ -63,9 +68,10 @@ function play() {
 //---------- //
 function drawHearts() {
     // Draw hearts
-    for (let x = 1; x <= 10; x++) {
-        life.innerHTML += heart;
+    if (health.length < 1) {
+       console.log('dead')
     }
+    life.innerHTML = health.join('');
 }
 // Changes the display of Stats
 function displayStats() {
@@ -83,8 +89,16 @@ function reset() {
     displayStats();
 
     // Reset Hearts
-    document.getElementById('life').innerHTML = '';
+    health = [];
+    // Draw Reset Hearts
+    for (let x = 1; x <= 10; x++) {
+        health.push(heart);
+    }
     drawHearts();
+
+    // Reset Weapon
+    sword = 'sword1.png';
+    document.getElementById('sword').src = 'images/' + sword;
 
     newMap();
 }
@@ -167,15 +181,27 @@ function keyDown(event) {
             imgKey = "slime.png";
             displayOnHistory(imgKey);
 
-            // Remove from array after death
-            slimeTiles.splice(slimeTiles.indexOf(walkerId), 1);
+            // Remove hearts
+            health.pop();
+            drawHearts();
 
-        } else if (kingTiles.includes(walkerId)) {
+            // Remove from array after death
+            // slimeTiles.splice(slimeTiles.indexOf(walkerId), 1);
+            // Replace SLIME tile --> GRASS 
+        }
+        // KING SLIMES
+        else if (kingTiles.includes(walkerId)) {
             imgKey = 'slime_king.png';
             displayOnHistory(imgKey);
 
+            // Remove Hearts
+            // at index 0, remove 2 elems
+            health.splice(0, 2)
+            drawHearts();
+
             // Remove from array after death
-            kingTiles.splice(kingTiles.indexOf(walkerId), 1);
+            // kingTiles.splice(kingTiles.indexOf(walkerId), 1);
+            // Replace SLIME tile --> GRASS
         }
         // -------------- END SLIME
 
@@ -186,6 +212,12 @@ function keyDown(event) {
             replaceTile();
             // Remove from array
             flowerTiles.splice(flowerTiles.indexOf(walkerId), 1);
+
+            // ADD HEART onspace on a FLOWER
+            if (health.length < 20) {
+                health.push(heart);
+                drawHearts();
+            }
         }
         //----------------- END FLOWER TILE
 
@@ -314,7 +346,7 @@ function hideHowTo() {
 function buildGrid() {
     let tile = 'fence_tl_tile.png';
 
-    
+
 
     for (let row = 1; row <= 12; row++) { // y
         for (let col = 1; col <= 12; col++) { // x
