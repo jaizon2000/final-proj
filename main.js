@@ -10,16 +10,16 @@ let expBar = document.getElementById('exp');
 
 
 // STATS
-let user = {
+let knight = {
+    name: '',
     lvl: 10,
     str: 0,
+    atk: 0,
     killed: 0,
     exp: 0,
     health: [],
 };
 
-let lvl = 0;
-let atk = 0;
 let str = 1;
 
 
@@ -34,6 +34,7 @@ let heart = '<img src="images/heart.png"><br>';
 // TILE LOCATIONS LIST
 let tiles = {
     flower: [],
+    burger: [],
     bush: [],
     slime: [],
     king: [],
@@ -50,7 +51,10 @@ let swordTiles = [];
 let histList = [];
 
 // KNIGHT STUFF
+let name = 'John';
+let nameplate = '<span id="nameplate">' + name + '</span>';
 let knightImg = '<img id="knight" src="images/knight.png">';
+
 let sword = 'sword tile';
 let getSword = false;
 
@@ -113,17 +117,17 @@ function drawHearts() {
 }
 // Changes the display of Stats
 function displayStats() {
-    document.getElementById('lvl').innerHTML = lvl;
-    document.getElementById('str').innerHTML = str;
+    document.getElementById('lvl').innerHTML = knight.lvl;
+    document.getElementById('str').innerHTML = knight.str;
     document.getElementById('killed').innerHTML = killed;
 }
 
 // RESET GAME
 function reset() {
     // Reset Stats
-    lvl = 0;
-    str = 1;
-    atk = 0;
+    knight.lvl = 0;
+    knight.str = 1;
+    knight.atk = 0;
     killed = 0;
     expBar.value = 0;
 
@@ -156,6 +160,7 @@ function newMap() {
     slimeTiles = [];
     kingTiles = [];
     swordTiles = [];
+    tiles.burger = [];
 
     // Reset History
     histList = [];
@@ -193,12 +198,12 @@ function replaceTile() {
             sword = 'sword-extra.png';
         }
         // Replace Tile w/ sword
-        document.getElementById(walkerId).innerHTML = knightImg + "<img src='images/" + sword + "'>";
+        document.getElementById(walkerId).innerHTML = knightImg + nameplate+ "<img src='images/" + sword + "'>";
         // Put sword coord in array
         swordTiles.push(walkerId);
         // sword = tile;
     } else {
-        document.getElementById(walkerId).innerHTML = knightImg + "<img src='images/" + tile + "'>";
+        document.getElementById(walkerId).innerHTML = knightImg + nameplate+ "<img src='images/" + tile + "'>";
         sword = 'sword1.png';
     }
 }
@@ -216,7 +221,8 @@ function updateExp(tile) {
 
     // GAIN A LEVEL
     if (expBar.value >= 100) {
-        lvl++;
+        knight.lvl++;
+        knight.str += 2;
         displayStats();
         displayOnHistory('lvlup.png')
         expBar.value = 0;
@@ -279,7 +285,7 @@ function keyDown(event) {
     if (key == 78) { // 'n' Key
         newMap();
     } else if (key == 13) { // ENTER Key
-        let name = document.getElementById('name').value;
+        name = document.getElementById('name').value;
         console.log(name);
 
     } else if (key == 32) { // SPACE key
@@ -290,38 +296,54 @@ function keyDown(event) {
         // SLIMES //
         if (slimeTiles.includes(walkerId)) {
             tile = "slime.png";
+            // Display on History
             displayOnHistory(tile);
-
             // Interaction b/w enemy and player
             startBattle(tile);
         }
-        // KING SLIMES
+
+        // KING SLIMES //
         else if (kingTiles.includes(walkerId)) {
             tile = 'slime_king.png';
             displayOnHistory(tile);
-
             // Interaction b/w enemy and player
             startBattle(tile);
-
-
         }
-        // -------------- END SLIME
+        // -------------- END SLIMES
 
         // FLOWER TILE - Gives 1 heart
         else if (flowerTiles.includes(walkerId)) {
-            tile = 'flower_tile.png';
-            displayOnHistory(tile);
+            displayOnHistory('flower_tile.png');
             replaceTile();
             // Remove from array
             flowerTiles.splice(flowerTiles.indexOf(walkerId), 1);
 
-            // ADD HEART onspace on a FLOWER
+            // ADD 1 HEART 
             if (health.length < 20) {
                 health.push(heart);
                 drawHearts();
             }
         }
         //----------------- END FLOWER TILE
+
+        // BURGER TILE - Give 5 hearts
+        else if (tiles.burger.includes(walkerId)) {
+            displayOnHistory('burger.png');
+            replaceTile();
+
+            // ADD 5 HEARTS
+            let j = health.length + 5;
+            while (health.length != j) {
+                if (health.length < 20) {
+                    health.splice(1, 0, heart);
+                    drawHearts();
+                } else {
+                    break;
+                }
+            }
+        }
+        // ------------------- BURGER TILE
+
 
         // BUSH TILE - Gives a sword
         else if (bushTiles.includes(walkerId)) {
@@ -342,7 +364,7 @@ function keyDown(event) {
             // Gets img src of sword at current tile
             let imgHTML = document.getElementById(walkerId).getElementsByTagName('img');
             let swordAtk = 1;
-            // CHANGE STR depending on sword
+            // CHANGE KNIGHT STR depending on sword
             if (sword == 'sword1.png') {
                 swordAtk = 1
             } else if (sword == 'sword2.png') {
@@ -352,7 +374,7 @@ function keyDown(event) {
             } else if (sword == 'sword-extra.png') {
                 swordAtk = 1000;
             }
-            str = atk + swordAtk;
+            knight.str = knight.atk + swordAtk;
             displayStats();
 
             // CHANGE WEAPON IMG with sword at current tile
@@ -372,10 +394,10 @@ function keyDown(event) {
         // Restart enemy life on move
         slime.life = 4;
         kingSlime.life = 10;
-
+        let img ='';
         if (key == 38) { // UP key
-            tile = 'up_arrow.png';
-            displayOnHistory(tile);
+            img = 'up_arrow.png';
+            displayOnHistory(img);
 
             // FENCE BORDER CHECK
             if (walkerRow == 2) {
@@ -383,11 +405,11 @@ function keyDown(event) {
             } else {
                 walkerRow--;
             }
-            // ----------
+            // ---------- UP
 
         } else if (key == 39) { // RIGHT key
-            tile = 'right_arrow.png';
-            displayOnHistory(tile);
+            img = 'right_arrow.png';
+            displayOnHistory(img);
 
             // FENCE BORDER CHECK
             if (walkerCol == 11) {
@@ -395,11 +417,11 @@ function keyDown(event) {
             } else {
                 walkerCol++;
             }
-            // ----------
+            // ---------- RIGHT
 
         } else if (key == 40) { // DOWN key
-            tile = 'down_arrow.png';
-            displayOnHistory(tile);
+            img = 'down_arrow.png';
+            displayOnHistory(img);
 
             // FENCE BORDER CHECK 
             if (walkerRow == 11) {
@@ -407,29 +429,29 @@ function keyDown(event) {
             } else {
                 walkerRow++;
             }
-            // ----------
+            // ---------- DOWN
 
         } else if (key == 37) { //LEFT key
-            tile = 'left_arrow.png';
-            displayOnHistory(tile);
+            img = 'left_arrow.png';
+            displayOnHistory(img);
             // FENCE BORDER CHECK
             if (walkerCol == 2) {
                 walkerCol == 2;
             } else {
                 walkerCol--;
             }
-            // ----------
+            // ---------- LEFT
         }
         // DISPLAY NEW KNIGHT ON GRID
         // Remove current Knight
         document.getElementById('knight').remove();
-
+        document.getElementById('nameplate').remove()
         // Update walkerId to ne Knight coordinate
         walkerId = 'cell' + walkerCol + '-' + walkerRow;
 
         // Add knight at walker id
         let currentTile = document.getElementById(walkerId);
-        currentTile.innerHTML = knightImg + currentTile.innerHTML;
+        currentTile.innerHTML = knightImg + nameplate + currentTile.innerHTML;
 
 
     }
@@ -493,9 +515,18 @@ function buildGrid() {
                 let randomTile = Math.random(); // 0-0.99
                 if (randomTile < 0.85) { // 90%
                     tile = 'grass_tile.png';
+
                 } else if (randomTile < 0.91) { // 6%
-                    tile = 'flower_tile.png';
-                    flowerTiles.push("cell" + col + "-" + row);
+                    let randFlower = Math.random();
+                    if (randFlower < 0.85) {
+                        tile = 'flower_tile.png';
+                        flowerTiles.push("cell" + col + "-" + row);
+
+                    } else {
+                        tile = 'burger.png';
+                        tiles.burger.push("cell" + col + '-' + row);
+                    }
+
 
                 } else if (randomTile < 0.95) { // 4%
                     tile = 'bush_tile.png';
@@ -515,7 +546,7 @@ function buildGrid() {
             // INITIAL KNIGHT TILE
             if (row == 6 && col == 6) {
                 let currentTile = document.getElementById('cell6-6');
-                currentTile.innerHTML = knightImg + currentTile.innerHTML;
+                currentTile.innerHTML = knightImg + nameplate + currentTile.innerHTML;
             }
 
         }

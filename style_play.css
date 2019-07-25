@@ -20,6 +20,7 @@ html {
 body {
     margin: auto;
     height: 100%;
+    user-select: none;
 }
 
 #content {
@@ -96,30 +97,48 @@ body {
     /* border: 1px solid black; */
     width: 32px;
     height: 32px;
+    /* display grid like a grid */
     float: left;
-    /* displays as a grid */
 }
 
-/* FIX TILE OVERLAY */
 #grid div img {
-    position: absolute;
     width: 32px;
+
+    /* FIX TILE OVERLAY */
+    background-color: #64C195;
 }
 
-#knight {
+#knight img {
+    position: absolute;
     z-index: 1;
+}
+
+#nameplate {
+    /* margin-top: 16px; */
+    padding: 2px 5px;
+
+    text-align: center;
+    font-size: 11pt;
+    background-color: rgba(34, 32, 48, 0.8);
+
+    position: relative;
+    top: -40px;
+    margin-left:-100%;
+    margin-right: -100%;
+    overflow: visible;
 }
 
 #life {
     position: absolute;
     top: 35px;
     left: 16px;
-    /* background-color: rgba(0, 0, 0, 0.3); */
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    padding: 1px 2px;
 }
 
+
 /* ------- END OF GRID WALK*/
-
-
 
 /* STATS BOX*/
 div>h1 {
@@ -152,6 +171,13 @@ div>h1 {
 
 }
 
+input {
+    background-color: #495466;
+    padding: 4px 0;
+    box-shadow: -3px 3px #323642;
+    border: 1px solid #222030;
+}
+
 progress {
     width: 100%;
     height: 10px;
@@ -177,6 +203,13 @@ td {
     text-align: right;
     width: 100%;
     font-size: 50px;
+    vertical-align: middle;
+}
+
+progress {
+    width: 100%;
+    height: 10px;
+    background-color: none;
     vertical-align: middle;
 }
 
