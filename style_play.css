@@ -30,7 +30,7 @@ body {
 
     /* Build Grid Display*/
     grid-template-columns: 0fr 0fr 100px;
-    
+
     justify-content: center;
     align-content: center;
 }
@@ -39,14 +39,14 @@ body {
     display: none;
 }
 
-.centerText {
+.center {
     text-align: center;
+    line-height: 30px;
 }
 
 /* HOW TO BOX */
 #how-to {
     background-color: black;
-
     /* Positioning */
     margin: auto;
     position: absolute;
@@ -54,6 +54,8 @@ body {
     /* Bring at the front */
     width: 400px;
     padding: 5px 75px;
+    left: 0;
+    right: 0;
 }
 
 /* ------  END OF HOW TO BOX*/
@@ -68,7 +70,7 @@ body {
 #stats {
     box-shadow: -10px 10px rgba(0, 0, 0, 0.4);
     border: 2px solid rgb(44, 14, 78);
-    
+
 }
 
 
