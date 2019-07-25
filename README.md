@@ -17,6 +17,8 @@ map tiles - https://is.gd/kIxQgN
 knight.png - https://bit.ly/2Sko7Kx
 
 ## Tutorials Used
+* Complete Guide to flexbox - https://is.gd/kpLzBz
+* Complete Guide to Grid - https://is.gd/fWAfYW
 
  * **HTML TABLES** - https://www.w3schools.com/html/html_tables.asp
  * **CSS Selectors** - https://bit.ly/2SghGbi 

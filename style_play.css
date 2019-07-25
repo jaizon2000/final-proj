@@ -1,19 +1,38 @@
-html {
-    background: url(images/bg.jpg), linear-gradient(#57D2F4, #04A287);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: 50% 50%;
+* {
+    font-weight: normal;
 
-    max-width: 1400px;
-    height: 768px;
+}
+
+html {
+    background: url(images/bg1.png), linear-gradient(#57D2F4, #04A287);
+    background-repeat: repeat-x;
+    background-position: left top;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100%;
 
     color: #F3F0EC;
     overflow: hidden;
     font-family: 'VT323', monospace;
     font-size: 25px;
 }
-* {
-    font-weight: normal;
+
+body {
+    margin: auto;
+    height: 100%;
+}
+
+#content {
+    /* PERFECT CENTERS PLAY BOX */
+    height: 100%;
+    display: grid;
+    column-gap: 10px;
+
+    /* Build Grid Display*/
+    grid-template-columns: 0fr 0fr 100px;
+    
+    justify-content: center;
+    align-content: center;
 }
 
 .hide {
@@ -30,7 +49,7 @@ html {
 
     /* Positioning */
     margin: auto;
-    position: relative;
+    position: absolute;
     z-index: 2;
     /* Bring at the front */
     width: 400px;
@@ -39,51 +58,39 @@ html {
 
 /* ------  END OF HOW TO BOX*/
 
-
-#play-page,
 #grid-box {
-    width: 386px;
-    /* size of grid, etc */
-
+    /* size of anything inside grid-box */
+    line-height: 10px;
 }
 
+/* SHADOWS */
 #play-page,
 #stats {
     box-shadow: -10px 10px rgba(0, 0, 0, 0.4);
     border: 2px solid rgb(44, 14, 78);
-
-
-}
-
-#grid-box {
-    line-height: 10px;
+    
 }
 
 
 /* GAME CONTAINER */
 #play-page {
+    margin-left: 20px;
     background-color: #64C196;
-    /* Centers content in Middle-ish */
-    position: absolute;
-    margin: auto;
-    top: 0;
-    bottom: 0;
-    left: 450px;
-    /* ---  
-    define a width&height or it'll use the whole page & won't center*/
-    height: 470px;
-
+    /* define a width&height or it'll use the whole page & won't center*/
+    width: 386px;
+    height: 420px;
 }
 
 /* ------- END OF GAME CONTAINER*/
 
-
 /* GRID-WALK */
 #grid-box {
     background-color: #64C196;
+    /* Used so hearts absolute is to grid-box */
+    position: relative;
 }
 
-#grid-box>#grid div {
+#grid div {
     /* border: 1px solid black; */
     width: 32px;
     height: 32px;
@@ -91,30 +98,28 @@ html {
     /* displays as a grid */
 }
 
-#grid img {
-    width: 32px;
-}
-
 /* FIX TILE OVERLAY */
 #grid div img {
     position: absolute;
+    width: 32px;
 }
+
 #knight {
     z-index: 1;
 }
 
-#grid-stats {
+#life {
     position: absolute;
-    bottom: 70px;
-    left: 12px;
-    padding: 0 5px;
+    top: 35px;
+    left: 16px;
     /* background-color: rgba(0, 0, 0, 0.3); */
 }
+
 /* ------- END OF GRID WALK*/
 
 
 
-/* STATS */
+/* STATS BOX*/
 div>h1 {
     /* Align -Stats- to center */
     position: relative;
@@ -133,13 +138,15 @@ div>h1 {
     height: 475px;
 
     /* Container Settings */
-    position: absolute;
-    left: -380px;
-    top: 0;
+    position: relative;
     padding: 0 25px;
-    margin: 0 25px;
+    /* margin: 0 25px; */
+    /* left: -380px;
+    top: 0;
+    
+     */
 
-    line-height: 20px;
+    line-height: 25px;
 
 }
 
@@ -182,7 +189,6 @@ td {
 /* HISTORY */
 #history {
     background-color: #4C2E35;
-    scroll-behavior: smooth;
     height: 32px;
     width: 383.5px;
     /* Hide scroll bars */
@@ -205,8 +211,9 @@ td {
 
 /* BUTTION MENU */
 #menu {
-    background-color: darkgray;
-    display: flex;
+    margin: 0;
+    /* background-color: darkgray; */
+    display: block;
     height: 50px;
     justify-content: center;
     align-items: center;

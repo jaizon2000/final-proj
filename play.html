@@ -8,88 +8,58 @@
 </head>
 
 <body>
-    <!-- HOW TO PLAY -->
-    <div id="how-to" class='hide'>
-        <h1 class="centerText">How to Play</h1>
-        <p>Type a name and press enter</p>
-        <p>Use arrow keys to move</p>
-        <p>Space to attack</p>
-        <p>Press New Map or 'n' to get a new map</p>
-        <p>Press the Reset button to get:
-            <ul>
-                <li>a new randomized map</li>
-                <li>and to reset your stats</li>
-            </ul>
-        </p>
-    </div>
-
-    <!-- GAME BOX -->
-    <div id="play-page">
-        <!-- GAME -->
-        <div id="grid-box">
-            <div id="menu">
-                <!-- BUTTONS -->
-                <h4>buttons</h4>
-                <div><a href="index.html"><button>Home</button></a></div>
-                <div><button id='how-to-btn'>How To</button></div>
-                <div><button id='new-map'>New Map</button></div>
-                <div><button id='reset-btn'>Reset</button></div>
-            </div>
-
-            <!-- PLAY GRID -->
-            <div id="grid">
-                <!-- <h5>Grid</h5> -->
-                <!-- Use Javascript to add grid -->
-            </div>
-
-            <!-- HEARTS ON GRID -->
-            <div id="grid-stats">
-                <div id="life">
-                    <!-- USE JS To add HEARTS -->
-                </div>
-            </div>
+    <div id="content">
+        <!-- HOW TO PLAY -->
+        <div id="how-to" class='hide'>
+            <h1 class="centerText">How to Play</h1>
+            <p>Type a name and press enter</p>
+            <p>Use arrow keys to move</p>
+            <p>Space to attack</p>
+            <p>Press New Map or 'n' to get a new map</p>
+            <p>Press the Reset button to get:
+                <ul>
+                    <li>a new randomized map</li>
+                    <li>and to reset your stats</li>
+                </ul>
+            </p>
         </div>
 
-        <!-- HISTORY -->
-        <div id="history">
-            <!-- USE JS to add History -->
-        </div>
 
+        
         <!-- STATS TABLE-->
         <div id="stats">
             <h1>- Stats -</h1>
-            <!-- NAME -->
-            <table id='tableName'>
-                <tr>
-                    <th>NAME: </th>
-                </tr>
-                <tr>
-                    <th><input id='name'></th>
-                </tr>
-            </table>
-
-            <!-- STATS -->
             <table>
+                <!-- NAME -->
                 <tr>
+                    <th>NAME: <input id='name'></th>
+                </tr>
+
+                <tr>
+                    <!-- LEVEL -->
                     <th>LEVEL: </th>
                     <td><span id="lvl">0</span></td>
-
                 </tr>
 
+                <!-- STR -->
                 <tr>
                     <th>STR: </th>
                     <td><span id='str'>1</span></td>
                 </tr>
 
+                <!-- KILLED -->
                 <tr>
                     <th>MONSTERS: <br>KILLED </th>
                     <td><span id='killed'>0</span></td>
                 </tr>
 
+                <!-- WEAPON -->
                 <tr>
                     <th>WEAPON: </th>
                     <td><img id='sword' src='images/sword1.png'></td>
                 </tr>
+
+                <!-- EXP -->
                 <tr>
                     <th>EXP:</th>
                     <th colspan="2"><progress id='exp' value="99" min="0" max="100"></progress></th>
@@ -99,8 +69,39 @@
 
         </div>
 
-        <!-- BUTTONS -->
+        <!-- GAME BOX -->
+        <div id="play-page">
 
+            <!-- GRID -->
+            <div id="grid-box">
+                <!-- PLAY GRID -->
+                <div id="grid">
+                    <!-- Use JS to add grid -->
+                </div>
+
+                <!-- HEARTS ON GRID -->
+                <div id="life">
+                    <!-- USE JS To add HEARTS -->
+                </div>
+                <!-- HISTORY -->
+            <div id="history">
+                    <!-- USE JS to add History -->
+                </div>
+                <!-- END OF HISTORY -->
+            </div>
+            <!-- END OF GRID -->
+
+            
+        </div>
+
+        <!-- BUTTONS -->
+        <div id="menu">
+            <div><a href="index.html"><button>Home</button></a></div>
+            <div><button id='how-to-btn'>How To</button></div>
+            <div><button id='new-map'>New Map</button></div>
+            <div><button id='reset-btn'>Reset</button></div>
+        </div>
+        <!-- END OF BUTTONS -->
     </div>
 
 
