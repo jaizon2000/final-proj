@@ -8,32 +8,26 @@
 </head>
 
 <body>
-    <!-- AUDIO -->
-    <audio id="bg-music" loop autoplay muted>
-        <source src="sounds/29 Tyrant's Bounty.mp3" type="audio/mpeg">
-    </audio>
-
-
-    <!-- HOW TO PLAY -->
-    <div id="how-to">
-        <h1 class="center">How to Play</h1>
-        <hr>
-        <p>Type a name and press <span class='key'>enter</class></p>
-        <p>Use <img width='80px' src="images/sheets/arrows.png"> to move</p>
-        <p><span class="key">Space</span> to attack</p>
-        <p>Press <span class="key">New Map</span> or '<span class="key">n</span>' to get a new map</p>
-        <p>Press the <span class="key">Reset</span> button to get:
-            <ul>
-                <li>a <u>new</u> randomized map</li>
-                <li>and to <u>reset</u> your stats</li>
-            </ul>
-        </p>
-        <hr>
-        <p style="font-size:18pt; text-align:center">Click outside the box to exit</p>
-
-    </div>
-
     <div id="content">
+        <!-- HOW TO PLAY -->
+        <div class="pop-up" id="how-to">
+            <h1 class="center">How to Play</h1>
+            <hr>
+            <p>Type a name and press <span class='key'>enter</class>
+            </p>
+            <p>Use <img width='80px' src="images/sheets/arrows.png"> to move</p>
+            <p><span class="key">Space</span> to attack</p>
+            <p>Press <span class="key">New Map</span> or '<span class="key">n</span>' to get a new map</p>
+            <p>Press the <span class="key">Reset</span> button to get:
+                <ul>
+                    <li>a <u>new</u> randomized map</li>
+                    <li>and to <u>reset</u> your stats</li>
+                </ul>
+            </p>
+            <hr>
+            <p style="font-size:18pt; text-align:center">Click anywhere to exit</p>
+        </div>
+
 
         <!-- STATS TABLE-->
         <div id="stats">
@@ -115,6 +109,17 @@
         </div>
         <!-- END OF BUTTONS -->
     </div>
+
+    <!-- AUDIO -->
+    <!-- BG AUDIO -->
+    <audio id="bg-music" loop autoplay src="sounds/29 Tyrant's Bounty.ogg"></audio>
+
+    <!-- SOUND EFFECTS -->
+    <audio id="grass" src="sounds/grass_short.mp3"></audio>
+    <audio id="hover" src="sounds/hover.mp3"></audio>
+    <audio id="item_get" src="sounds/item_get.mp3"></audio>
+    <audio id="levelup" src="sounds/levelup.wav"></audio>
+    <audio id="hit" src="sounds/hit.wav"></audio>
 
 
     <!-- JAVASCRIPT -->

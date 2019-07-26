@@ -1,3 +1,7 @@
+* {
+    font-family: 'VT323', monospace;
+
+}
 html {
     background: url(images/bg.jpg), linear-gradient(#57D2F4, #04A287);
     background-repeat: no-repeat;
@@ -5,7 +9,6 @@ html {
     background-attachment: fixed;
     background-size: cover;
 
-    font-family: 'VT323', monospace;
 }
 
 main#start-page {
@@ -50,7 +53,25 @@ img {
     bottom: -7px;
 }
 button {
-    padding: 5px 40px;
-    font-size: 18pt;
+    /* SIZING */
+    padding: 7px 30px;
+
+    font-size: 40pt;
+    color: #F3F0EC;
+    background-color: #2B2024;
+    border: 2px solid #F3F0EC;
+
+    /* TRANSITION ANIMATION */
+    transition-property: all;
+    transition-duration: 0.3s;
+    transition-timing-function: ease;
+}
+
+button:hover {
+    transform: scale(3, 3);
+    cursor: pointer;
+    color: #2B2024;
+    background-color: #F3F0EC;
+    border: 2px solid #2B2024;
 }
 /* ----- END OF START PAGE */

@@ -23,7 +23,6 @@ let knight = {
     exp: 0,
     health: [],
 };
-let nameplate = '<span id="nameplate">' + knight.name + '</span>';
 
 // TILE LOCATIONS LIST
 let tiles = {
@@ -62,6 +61,7 @@ newHealth - ONLY changes when user LVLS UP. (make it harder)
 let slime = {
     health: 4,
     newHealth: 4,
+    extra: 3,
     atk: 1,
 };
 
@@ -69,6 +69,7 @@ let slime = {
 let king = {
     health: 10,
     newHealth: 10,
+    extra: 5,
     atk: 2,
 };
 
@@ -94,15 +95,26 @@ function play() {
     document.getElementById('new-map').addEventListener('click', newMap);
     // How To Button
     document.getElementById('how-to-btn').addEventListener('click', showHowTo);
-    document.getElementById('content').addEventListener('mousedown', hideHowTo);
+    document.body.addEventListener('mousedown', hideHowTo);
     // Key Down Event
     document.addEventListener('keydown', keyDown);
     displayStats();
+
+    // AUDIO Event Listeners
+    // HOVER
+    document.getElementById('menu').addEventListener('mouseover', sound)
+    document.getElementById('stats').addEventListener('mouseover', sound)
+    // GET_ITEM
 }
 
 //---------- //
 // Functions //
 //---------- //
+function sound() {
+    let audio = document.getElementById('hover');
+    audio.currentTime = 0;
+    audio.play();
+}
 
 // FUNCTIONS FOR CREATING RANDOM GRID //
 // ---------------------------------- //
@@ -271,6 +283,8 @@ function replaceTile() {
     }
 
     // Replace Tile w/ sword or grass on SPACE
+    let nameplate = '<span id="nameplate">' + knight.name + '</span>';
+
     currentTile.innerHTML = knightImg + "<img src='images/" + tile + "'>" + nameplate;
 }
 
@@ -285,8 +299,11 @@ function updateExp(tile) {
     }
     expBar.value += knight.exp;
 
-    // GAIN A LEVEL
+    // GAIN A LEVEL if max!
     if (expBar.value >= expBar.max) {
+        // AUDIO
+        let audio = document.getElementById('levelup');
+        audio.play();
         // Gain lvl and str
         knight.lvl++;
         knight.str += 2;
@@ -300,16 +317,21 @@ function updateExp(tile) {
         expBar.max += 5;
 
         // Killing gets harder
-        slime.health += 2;
-        king.health += 4;
+        slime.health += slime.extra;
+        king.health += king.extra;
 
-        slime.newHealth += 2;
-        king.newHealth += 4;
+        slime.newHealth += slime.extra;
+        king.newHealth += king.extra;
     }
 
 }
 
 function startBattle(tile) {
+    // AUDIO
+    let audio = document.getElementById('hit');
+    audio.currentTime = 0;
+    audio.play();
+
     if (tile == 'slime.png') {
         // Remove enemy hearts
         slime.health -= knight.str;
@@ -378,10 +400,11 @@ function keyDown(event) {
             if (knight.name.trim().length >= 4 && knight.name.trim().length <= 9) {
                 break;
             }
-            knight.name = prompt('Please try again.\nName length has to be at between 4-9 characters:').trim();
+            knight.name = prompt('Please try again.\nName length has to be between 4-9 characters:').trim();
 
         }
         document.getElementById('nameplate').innerHTML = knight.name;
+
         console.log(knight.name);
     }
 
@@ -412,6 +435,12 @@ function keyDown(event) {
         else if (tiles.Flower.includes(walkerId)) { // [SPACE] flower
             displayOnHistory('flower_tile.png');
             replaceTile();
+
+            // AUDIO
+            let audio = document.getElementById('item_get');
+            audio.currentTime = 0;
+            audio.play();
+
             // Remove from array
             tiles.Flower.splice(tiles.Flower.indexOf(walkerId), 1);
 
@@ -420,6 +449,7 @@ function keyDown(event) {
                 knight.health.push(heart);
                 drawHearts();
             }
+
         }
         //----------------- END FLOWER TILE
 
@@ -427,7 +457,10 @@ function keyDown(event) {
         else if (tiles.Burger.includes(walkerId)) { // [SPACE] Burger
             displayOnHistory('burger.png');
             replaceTile();
-
+            // AUDIO
+            let audio = document.getElementById('item_get');
+            audio.currentTime = 0;
+            audio.play();
             // ADD 5 HEARTS
             let j = knight.health.length + 5;
             while (knight.health.length != j) {
@@ -438,6 +471,7 @@ function keyDown(event) {
                     break;
                 }
             }
+
         }
         // ------------------- BURGER TILE
 
@@ -445,13 +479,18 @@ function keyDown(event) {
         // [SPACE] Bush
         else if (tiles.Bush.includes(walkerId)) { // [SPACE] Bush
             displayOnHistory('bush_tile.png');
-
+            // AUDIO
+            let audio = document.getElementById('grass');
+            audio.currentTime = 0;
+            audio.play();
             getSword = true;
             replaceTile();
             getSword = false;
 
             // Remove Bush from array
             tiles.Bush.splice(tiles.Bush.indexOf(walkerId), 1);
+
+
         }
         //----------------- END BUSH TILE
 
@@ -464,6 +503,10 @@ function keyDown(event) {
             // CHANGE KNIGHT STR depending on sword
             console.log(currentTileSrc.src)
             console.log(knight.atk)
+            // AUDIO
+            let audio = document.getElementById('item_get');
+            audio.currentTime = 0;
+            audio.play();
             if (currentTileSrc.src == '/images/sword1.png') {
                 knight.atk = 1
                 console.log('changed')
@@ -491,13 +534,18 @@ function keyDown(event) {
             replaceTile();
             // REMOVE FROM sword Tiles array
             tiles.Sword.splice(tiles.Sword.indexOf(walkerId), 1);
+
+
         }
         //----------------- END SWORD TILE
 
 
         // ARROW KEYS
     } else if (key == 38 || key == 39 || key == 40 || key == 37) { // UP, RIGHT, DOWN, LEFT
-
+        // AUDIO
+        let audio = document.getElementById('grass');
+        // audio.currentTime = 0;
+        audio.play();
         // Restart enemy life on move
         slime.health = slime.newHealth;
         king.health = king.newHealth;
@@ -554,6 +602,7 @@ function keyDown(event) {
 
         // Add knight at walker id
         let currentTile = document.getElementById(walkerId);
+        let nameplate = '<span id="nameplate">' + knight.name + '</span>';
         currentTile.innerHTML = knightImg + currentTile.innerHTML + nameplate;
 
 
@@ -611,6 +660,7 @@ function buildGrid() {
                 let currentTile = document.getElementById('cell6-6');
 
                 // Add img and name plate
+                let nameplate = '<span id="nameplate">' + knight.name + '</span>';
                 currentTile.innerHTML = knightImg + currentTile.innerHTML + nameplate;
             }
 
