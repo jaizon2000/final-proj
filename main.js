@@ -172,9 +172,9 @@ function getRandSword() {
         sword_tile = 'sword1.png';
     } else if (randSword < 0.95) { // 5%
         sword_tile = 'sword2.png';
-    } else if (randSword < 0.998) { // 4.8%
+    } else if (randSword < 0.99) { // 4.8%
         sword_tile = 'sword3.png';
-    } else { // 0.2%
+    } else { // 1%
         sword_tile = 'sword-extra.png';
     }
     return sword_tile;
@@ -279,6 +279,7 @@ function reset() {
 
 // BUILD NEW MAP
 function newMap() {
+    
     // Reset Knight coordinates
     walkerRow = 6;
     walkerCol = 6;
@@ -299,6 +300,7 @@ function newMap() {
     grid.innerHTML = '';
     // New Random Grid
     buildGrid();
+
 }
 
 // DISPLAY IMG IN HISTORY
@@ -437,7 +439,7 @@ function keyDown(event) {
     let key = event.keyCode;
 
     // [n] Key
-    if (key == 78) { // [n] Key
+    if (key == 78 && document.activeElement != document.getElementById('name')) { // [n] Key
         newMap();
     }
 
@@ -458,7 +460,7 @@ function keyDown(event) {
     }
 
     // [SPACE] Key
-    else if (key == 32) { // [SPACE] key
+    else if (key == 32 && document.activeElement != document.getElementById('name')) { // [SPACE] key
         // Prevent space key from clicking button
         window.event || event;
         event.preventDefault();
@@ -678,6 +680,7 @@ function showReset() {
 }
 
 function hideBox() {
+    // setTimeout(function(){console.log(document.activeElement)},2000);
     atclick();
     document.getElementById('how-to').classList.add('hide');
     document.getElementById('reset').classList.add('hide');

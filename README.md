@@ -21,7 +21,8 @@ knight.png - https://bit.ly/2Sko7Kx
 * BG - #29 Tyrant's Bounty - https://is.gd/fhOkVR
 * grass walk - https://is.gd/ugtkH6
 
-- Audio/Video References: 
+* Audio/Video References: 
+
    - https://is.gd/SGvwlU
    - https://is.gd/mi53JL
 
@@ -30,6 +31,7 @@ knight.png - https://bit.ly/2Sko7Kx
 * Guide to HTML/CSS - https://internetingishard.com/
 * Complete Guide to flexbox - https://is.gd/kpLzBz
 * Complete Guide to Grid - https://is.gd/fWAfYW
+* Check focus on elem - https://is.gd/oDcW7T
 
  * **HTML TABLES** - https://www.w3schools.com/html/html_tables.asp
  * **CSS Selectors** - https://bit.ly/2SghGbi 
