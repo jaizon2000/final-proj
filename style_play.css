@@ -121,8 +121,8 @@ body {
     font-size: 11pt;
     background-color: rgba(34, 32, 48, 0.8);
 
-    position: absolute;
-    top: -40px;
+    position: relative;
+    top: -50px;
     margin: 0 -100%;
     /* margin-left:-100%;
     margin-right: -100%; */

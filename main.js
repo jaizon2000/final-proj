@@ -352,11 +352,16 @@ function keyDown(event) {
     // [ENTER] Key
     else if (key == 13) { // [ENTER] Key
         let name = document.getElementById('name');
-
         knight.name = name.value;
-        document.getElementById('nameplate').innerHTML = name.value;
-        console.log(knight.name);
+        while (true) {
+            if (knight.name.trim().length >= 4 && knight.name.trim().length <= 20) {
+                break;
+            }
+            knight.name = prompt('Please try again.\nName length has to be at between 4-20 characters:').trim();
 
+        }
+        document.getElementById('nameplate').innerHTML = knight.name;
+        console.log(knight.name);
     }
 
     // [SPACE] Key
@@ -530,7 +535,7 @@ function keyDown(event) {
         // Add knight at walker id
         let currentTile = document.getElementById(walkerId);
         let nameplate = '<span id="nameplate">' + knight.name + '</span>';
-        currentTile.innerHTML = knightImg + nameplate + currentTile.innerHTML;
+        currentTile.innerHTML = knightImg + currentTile.innerHTML + nameplate;
 
 
     }
