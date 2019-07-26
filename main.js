@@ -1,12 +1,67 @@
 /* THE CONQUEST SCRIPT */
 'use strict';
 
-// MUSIC //
-document.getElementById('bg-music').volume = 0.2;
+// ----------- //
+// AUDIO PLAYS //
+// ----------- //
+// athover & at click are called from each button or hover
 
+// MUSIC //
+// Has to be up here so no errors
+document.getElementById('bg-music').volume = 0.4;
+
+function playgrass() {
+    let audio = document.getElementById('grass');
+    audio.currentTime = 0;
+    audio.play();
+}
+
+function athover() {
+    let audio = document.getElementById('athover');
+    audio.currentTime = 0;
+    audio.play();
+}
+
+function atclick() {
+    let audio = document.getElementById('atclick');
+    audio.currentTime = 0;
+    audio.play();
+}
+
+function playitem() {
+    let audio = document.getElementById('item_get');
+    audio.currentTime = 0;
+    audio.play();
+}
+
+function playlevelup() {
+    let audio = document.getElementById('levelup');
+    audio.currentTime = 0;
+    audio.play();
+}
+
+function playhit() {
+    let audio = document.getElementById('hit');
+    audio.currentTime = 0;
+    audio.play();
+}
+
+function playgameover() {
+
+    let audio = document.getElementById('gameover');
+    audio.play();
+
+    document.getElementById('content').remove();
+    let end = document.createElement('DIV');
+    end.setAttribute('id', 'endgame');
+    end.innerHTML = "<h1>You lost your life.</h1><p>play again?</p><p><a href='/play.html'><button onmouseenter='athover()'>Yes</button></a><a href='/index.html'><button onmouseenter='athover()'>Bai!</button></a></p>";
+
+    document.body.appendChild(end);
+}
 
 // Global Vars //
 // ----------- //
+let lose = false;
 let grid = document.getElementById('grid');
 let history = document.getElementById('history');
 let expBar = document.getElementById('exp');
@@ -90,31 +145,22 @@ function play() {
     //--------------- //
 
     // Reset Button
-    document.getElementById('reset-btn').addEventListener('click', reset);
+    // document.getElementById('reset-btn').addEventListener('click', atclick);
     // New Map Button
     document.getElementById('new-map').addEventListener('click', newMap);
     // How To Button
     document.getElementById('how-to-btn').addEventListener('click', showHowTo);
-    document.body.addEventListener('mousedown', hideHowTo);
     // Key Down Event
     document.addEventListener('keydown', keyDown);
     displayStats();
 
     // AUDIO Event Listeners
-    // HOVER
-    document.getElementById('menu').addEventListener('mouseover', sound)
-    document.getElementById('stats').addEventListener('mouseover', sound)
     // GET_ITEM
 }
 
 //---------- //
 // Functions //
 //---------- //
-function sound() {
-    let audio = document.getElementById('hover');
-    audio.currentTime = 0;
-    audio.play();
-}
 
 // FUNCTIONS FOR CREATING RANDOM GRID //
 // ---------------------------------- //
@@ -122,11 +168,11 @@ function getRandSword() {
     let randSword = Math.random();
     let sword_tile = 'tile.png';
     console.log(randSword)
-    if (randSword < 0.75) { // 75%
+    if (randSword < 0.90) { // 90%
         sword_tile = 'sword1.png';
-    } else if (randSword < 0.95) { //15%
+    } else if (randSword < 0.95) { // 5%
         sword_tile = 'sword2.png';
-    } else if (randSword < 0.998) { // 9%
+    } else if (randSword < 0.998) { // 4.8%
         sword_tile = 'sword3.png';
     } else { // 0.2%
         sword_tile = 'sword-extra.png';
@@ -189,10 +235,14 @@ function displayGridTiles(col, row) {
 
 function drawHearts() {
     // Draw hearts
-    if (knight.health.length < 1) {
+    // Knight Dies
+    if (knight.health.length <= 0) {
         console.log('dead')
+        playgameover();
+
+    } else {
+        healthBar.innerHTML = knight.health.join('');
     }
-    healthBar.innerHTML = knight.health.join('');
 }
 // Changes the display of Stats
 function displayStats() {
@@ -201,7 +251,7 @@ function displayStats() {
     document.getElementById('killed').innerHTML = knight.killed;
 }
 
-// RESET GAME //
+// RESET GAME ?????????????????????????????????????????????//
 function reset() {
     // Reset Stats
     knight.lvl = 1;
@@ -302,11 +352,10 @@ function updateExp(tile) {
     // GAIN A LEVEL if max!
     if (expBar.value >= expBar.max) {
         // AUDIO
-        let audio = document.getElementById('levelup');
-        audio.play();
+        playlevelup();
         // Gain lvl and str
         knight.lvl++;
-        knight.str += 2;
+        knight.str += 1;
 
         // Display stats and lvl png
         displayStats();
@@ -328,9 +377,7 @@ function updateExp(tile) {
 
 function startBattle(tile) {
     // AUDIO
-    let audio = document.getElementById('hit');
-    audio.currentTime = 0;
-    audio.play();
+    playhit();
 
     if (tile == 'slime.png') {
         // Remove enemy hearts
@@ -384,7 +431,9 @@ function startBattle(tile) {
 // ----------------- // 
 // KEY DOWN FUNCTION //
 // ----------------- //
+
 function keyDown(event) {
+
     let key = event.keyCode;
 
     // [n] Key
@@ -437,9 +486,7 @@ function keyDown(event) {
             replaceTile();
 
             // AUDIO
-            let audio = document.getElementById('item_get');
-            audio.currentTime = 0;
-            audio.play();
+            playitem();
 
             // Remove from array
             tiles.Flower.splice(tiles.Flower.indexOf(walkerId), 1);
@@ -480,9 +527,7 @@ function keyDown(event) {
         else if (tiles.Bush.includes(walkerId)) { // [SPACE] Bush
             displayOnHistory('bush_tile.png');
             // AUDIO
-            let audio = document.getElementById('grass');
-            audio.currentTime = 0;
-            audio.play();
+            playgrass();
             getSword = true;
             replaceTile();
             getSword = false;
@@ -496,31 +541,32 @@ function keyDown(event) {
 
         // [SPACE] Sword //
         else if (tiles.Sword.includes(walkerId)) {
+            // AUDIO
+            playitem();
+
+
             // Gets img src of sword at current tile
             let currentTileSrc = document.getElementById(walkerId).getElementsByTagName('img')[1];
-
 
             // CHANGE KNIGHT STR depending on sword
             console.log(currentTileSrc.src)
             console.log(knight.atk)
-            // AUDIO
-            let audio = document.getElementById('item_get');
-            audio.currentTime = 0;
-            audio.play();
-            if (currentTileSrc.src == '/images/sword1.png') {
-                knight.atk = 1
-                console.log('changed')
-            } //else if (currentTileSrc == 'sword2.png') {
-            //     knight.atk = 5;
-            // } else if (currentTileSrc == 'sword3.png') {
-            //     knight.atk = 10;
-            // } else if (currentTileSrc == 'sword-extra.png') {
-            //     knight.atk = 1000;
-            // }
-            // console.log('before ' + knight.str)
-            // knight.str = knight.atk + knight.atk;
-            // console.log('a ' + knight.str)
-            // displayStats();
+            let currenrStr = knight.atk;
+
+            if (currentTileSrc.src.includes('sword1.png')) {
+                knight.atk = 1;
+                
+            } else if (currentTileSrc.src.includes('sword2.png')) {
+                knight.atk = 5;
+            } else if (currentTileSrc.src.includes('sword3.png')) {
+                knight.atk = 10;
+            } else if (currentTileSrc.src.includes('sword4.png')) {
+                knight.atk = 1000;
+            }
+            console.log('before ' + knight.str)
+            knight.str = currenrStr + knight.atk;
+            console.log('a ' + knight.str)
+            displayStats();
 
 
             getSword = true;
@@ -529,6 +575,7 @@ function keyDown(event) {
             // CHANGE WEAPON IMG with sword at current tile
             let swordOnTable = document.getElementById('sword');
             swordOnTable.src = currentTileSrc.src;
+            
 
             // REPLACE SWORD TILE --> GRASS
             replaceTile();
@@ -543,9 +590,7 @@ function keyDown(event) {
         // ARROW KEYS
     } else if (key == 38 || key == 39 || key == 40 || key == 37) { // UP, RIGHT, DOWN, LEFT
         // AUDIO
-        let audio = document.getElementById('grass');
-        // audio.currentTime = 0;
-        audio.play();
+        playgrass();
         // Restart enemy life on move
         slime.health = slime.newHealth;
         king.health = king.newHealth;
@@ -621,17 +666,25 @@ function fixList(histList, displayKey) {
     }
 }
 // ----------------
+
 // HIDE & SHOW HOW TO
 function showHowTo() {
     document.getElementById('how-to').classList.remove('hide');
 }
 
-function hideHowTo() {
+function showReset() {
+    atclick();
+    document.getElementById('reset').classList.remove('hide');
+}
+
+function hideBox() {
+    atclick();
     document.getElementById('how-to').classList.add('hide');
+    document.getElementById('reset').classList.add('hide');
 }
 // ----------------- HIDE & SHOW HOW TO
 
-
+// ----------------- //
 // Build Random Grid //
 // ----------------- //
 function buildGrid() {

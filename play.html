@@ -8,9 +8,18 @@
 </head>
 
 <body>
+    <!-- <div id="endgame">
+        <h1>You lost your life.</h1>
+        <p>play again?</p>
+        <a href="/play.html"><button onmouseenter='athover()'>Yes</button></a><a href="/index.html"><button onmouseenter='athover()'>Bai!</button></a>
+    </div> -->
+
+
+
+
     <div id="content">
         <!-- HOW TO PLAY -->
-        <div class="pop-up" id="how-to">
+        <div id="how-to" class="pop-up" >
             <h1 class="center">How to Play</h1>
             <hr>
             <p>Type a name and press <span class='key'>enter</class>
@@ -25,48 +34,56 @@
                 </ul>
             </p>
             <hr>
-            <p style="font-size:18pt; text-align:center">Click anywhere to exit</p>
+            <p class="center"><button style="font-size:18pt;" id='exit' onclick="hideBox()" onmouseenter="athover()">exit</button></p>
         </div>
 
+        <!-- RESET -->
+        <div class="pop-up hide" id='reset'>
+            <h1>Are you sure?</h1>
+            <p>Pressing <span class="key">Yes</span> will reset your progress.</p>
+
+            <a href="/play.html"><button>Yes</button></a><button onclick="hideBox()">No</button>
+            
+        </div>
 
         <!-- STATS TABLE-->
         <div id="stats">
             <h1>- Stats -</h1>
             <table>
                 <!-- NAME -->
-                <tr>
+                <tr onmouseenter="athover()">
                     <th>
                         NAME: <span id="insert-name"></span>
                         <input id='name' maxlength="9">
                     </th>
                 </tr>
 
-                <tr>
+                <tr onmouseenter="athover()">
                     <!-- LEVEL -->
                     <th>LEVEL: </th>
                     <td><span id="lvl">0</span></td>
                 </tr>
 
                 <!-- STR -->
-                <tr>
+                <tr onmouseenter="athover()">
                     <th>STR: </th>
                     <td><span id='str'>1</span></td>
                 </tr>
 
                 <!-- KILLED -->
-                <tr>
+                <tr onmouseenter="athover()">
                     <th>MONSTERS: <br>KILLED </th>
                     <td><span id='killed'>0</span></td>
                 </tr>
 
                 <!-- WEAPON -->
-                <tr>
+                <tr onmouseenter="athover()">
                     <th>WEAPON: </th>
                     <td><img id='sword' src='images/sword1.png'></td>
                 </tr>
 
                 <!-- EXP -->
-                <tr>
+                <tr onmouseenter="athover()">
                     <th>EXP: </th>
                     <th colspan="2"><progress id='exp' value="9" min="0" max="10"></progress></th>
                 </tr>
@@ -102,10 +119,10 @@
 
         <!-- BUTTONS -->
         <div id="menu">
-            <div><a href="index.html"><button>Home</button></a></div>
-            <div><button id='how-to-btn'>How To</button></div>
-            <div><button id='new-map'>New Map</button></div>
-            <div><button id='reset-btn'>Reset</button></div>
+            <div><a href="index.html"><button onmouseenter="athover()" >Home</button></a></div>
+            <div><button id='how-to-btn' onmouseenter="athover()" onclick="atclick()">How To</button></div>
+            <div><button id='new-map' onmouseenter="athover()" onclick="atclick()">New Map</button></div>
+            <div><button id='reset-btn' onmouseenter="athover()" onclick="showReset()">Reset</button></div>
         </div>
         <!-- END OF BUTTONS -->
     </div>
@@ -113,13 +130,14 @@
     <!-- AUDIO -->
     <!-- BG AUDIO -->
     <audio id="bg-music" loop autoplay src="sounds/29 Tyrant's Bounty.ogg"></audio>
-
     <!-- SOUND EFFECTS -->
     <audio id="grass" src="sounds/grass_short.mp3"></audio>
-    <audio id="hover" src="sounds/hover.mp3"></audio>
+    <audio id="athover" src="sounds/hover.mp3"></audio>
+    <audio id="atclick" src="sounds/onclick.wav"></audio>
     <audio id="item_get" src="sounds/item_get.mp3"></audio>
     <audio id="levelup" src="sounds/levelup.wav"></audio>
     <audio id="hit" src="sounds/hit.wav"></audio>
+    <audio id="gameover" src="sounds/gameover.wav"></audio>
 
 
     <!-- JAVASCRIPT -->
