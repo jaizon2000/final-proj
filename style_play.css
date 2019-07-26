@@ -47,16 +47,24 @@ body {
 
 /* HOW TO BOX */
 #how-to {
-    background-color: black;
+    background-color: #1b0f0f;
+    border: 10px double white;
     /* Positioning */
     margin: auto;
     position: absolute;
     z-index: 2;
     /* Bring at the front */
-    width: 400px;
+    width: 420px;
     padding: 5px 75px;
-    left: 0;
-    right: 0;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.key {
+    border: 2px solid white;
+    padding: 0 10px;
 }
 
 /* ------  END OF HOW TO BOX*/
@@ -117,18 +125,17 @@ body {
     /* margin-top: 16px; */
     padding: 2px 5px;
 
-    text-align: center;
     font-size: 11pt;
     background-color: rgba(34, 32, 48, 0.8);
 
     position: relative;
-    top: -50px;
+    bottom: 50%;
+    right: 50%;
     margin: 0 -100%;
-    /* margin-left:-100%;
-    margin-right: -100%; */
-    overflow: visible;
 }
-
+#grid div {
+    text-align: center;
+}
 #life {
     position: absolute;
     top: 35px;

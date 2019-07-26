@@ -17,17 +17,18 @@
     <!-- HOW TO PLAY -->
     <div id="how-to">
         <h1 class="center">How to Play</h1>
-
-        <p>Type a name and press enter</p>
-        <p>Use arrow keys to move</p>
-        <p>Space to attack</p>
-        <p>Press New Map or 'n' to get a new map</p>
-        <p>Press the Reset button to get:
+        <hr>
+        <p>Type a name and press <span class='key'>enter</class></p>
+        <p>Use <img width='80px' src="images/sheets/arrows.png"> to move</p>
+        <p><span class="key">Space</span> to attack</p>
+        <p>Press <span class="key">New Map</span> or '<span class="key">n</span>' to get a new map</p>
+        <p>Press the <span class="key">Reset</span> button to get:
             <ul>
-                <li>a new randomized map</li>
-                <li>and to reset your stats</li>
+                <li>a <u>new</u> randomized map</li>
+                <li>and to <u>reset</u> your stats</li>
             </ul>
         </p>
+        <hr>
         <p style="font-size:18pt; text-align:center">Click outside the box to exit</p>
 
     </div>
@@ -42,7 +43,7 @@
                 <tr>
                     <th>
                         NAME: <span id="insert-name"></span>
-                        <input id='name' maxlength="15">
+                        <input id='name' maxlength="9">
                     </th>
                 </tr>
 
@@ -73,7 +74,7 @@
                 <!-- EXP -->
                 <tr>
                     <th>EXP: </th>
-                    <th colspan="2"><progress id='exp' value="9" min="0" max="100"></progress></th>
+                    <th colspan="2"><progress id='exp' value="9" min="0" max="10"></progress></th>
                 </tr>
 
             </table>

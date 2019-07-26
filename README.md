@@ -19,7 +19,10 @@ knight.png - https://bit.ly/2Sko7Kx
 ## Sounds
 
 * BG - #29 Tyrant's Bounty - https://is.gd/fhOkVR
-- grass walk - https://is.gd/ugtkH6
+* grass walk - https://is.gd/ugtkH6
+
+- Audio/Video References: 
+   - https://is.gd/SGvwlU
 
 ## Tutorials Used
 
