@@ -1,15 +1,15 @@
 html {
     background: url(images/bg.jpg), linear-gradient(#57D2F4, #04A287);
     background-repeat: no-repeat;
+    background-position: center;
     background-attachment: fixed;
-    background-position: 50% 50%;
+    background-size: cover;
 
-    max-width: 1400px;
-    max-height: 768px;
+    font-family: 'VT323', monospace;
 }
 
 main#start-page {
-    background-color: aliceblue;
+    background-color: rgba(240, 248, 255, 0.8);
     /* Centers content */
     position: absolute;
     margin: auto;
@@ -40,5 +40,17 @@ main#start-page {
 a {
     text-decoration: none;
     color: black;
+}
+h1 {
+    font-size: 50pt;
+    font-weight: normal;
+}
+img {
+    position: relative;
+    bottom: -7px;
+}
+button {
+    padding: 5px 40px;
+    font-size: 18pt;
 }
 /* ----- END OF START PAGE */

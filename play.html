@@ -8,26 +8,31 @@
 </head>
 
 <body>
+    <!-- AUDIO -->
+    <audio id="bg-music" loop autoplay muted>
+        <source src="sounds/29 Tyrant's Bounty.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <!-- HOW TO PLAY -->
+    <div id="how-to">
+        <h1 class="center">How to Play</h1>
+
+        <p>Type a name and press enter</p>
+        <p>Use arrow keys to move</p>
+        <p>Space to attack</p>
+        <p>Press New Map or 'n' to get a new map</p>
+        <p>Press the Reset button to get:
+            <ul>
+                <li>a new randomized map</li>
+                <li>and to reset your stats</li>
+            </ul>
+        </p>
+        <p style="font-size:18pt; text-align:center">Click outside the box to exit</p>
+
+    </div>
+
     <div id="content">
-        <!-- HOW TO PLAY -->
-        <div id="how-to" class='hide'>
-            <h1 class="center">How to Play</h1>
-            
-            <p>Type a name and press enter</p>
-            <p>Use arrow keys to move</p>
-            <p>Space to attack</p>
-            <p>Press New Map or 'n' to get a new map</p>
-            <p>Press the Reset button to get:
-                <ul>
-                    <li>a new randomized map</li>
-                    <li>and to reset your stats</li>
-                </ul>
-            </p>
-            <p style="font-size:18pt; text-align:center">Click anywhere to exit</p>
-
-        </div>
-
-
 
         <!-- STATS TABLE-->
         <div id="stats">
@@ -35,7 +40,10 @@
             <table>
                 <!-- NAME -->
                 <tr>
-                    <th>NAME: <input id='name'></th>
+                    <th>
+                        NAME: <span id="insert-name"></span>
+                        <input id='name' maxlength="9">
+                    </th>
                 </tr>
 
                 <tr>
@@ -64,8 +72,8 @@
 
                 <!-- EXP -->
                 <tr>
-                    <th>EXP:</th>
-                    <th colspan="2"><progress id='exp' value="99" min="0" max="100"></progress></th>
+                    <th>EXP: </th>
+                    <th colspan="2"><progress id='exp' value="9" min="0" max="100"></progress></th>
                 </tr>
 
             </table>
