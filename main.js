@@ -562,7 +562,7 @@ function keyDown(event) {
                 knight.atk = 5;
             } else if (currentTileSrc.src.includes('sword3.png')) {
                 knight.atk = 10;
-            } else if (currentTileSrc.src.includes('sword4.png')) {
+            } else if (currentTileSrc.src.includes('sword-extra.png')) {
                 knight.atk = 1000;
             }
             console.log('before ' + knight.str)
