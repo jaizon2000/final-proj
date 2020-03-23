@@ -1,4 +1,4 @@
-!(https://i.imgur.com/niA9zmn.png)
+![Image](https://i.imgur.com/niA9zmn.png)
 
 # Resources
 
