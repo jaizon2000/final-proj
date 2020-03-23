@@ -54,7 +54,7 @@ function playgameover() {
     document.getElementById('content').remove();
     let end = document.createElement('DIV');
     end.setAttribute('id', 'endgame');
-    end.innerHTML = "<h1>You lost your life.</h1><p>play again?</p><p><a href='final-proj/play.html'><button onmouseenter='athover()'>Yes</button></a><a href='/index.html'><button onmouseenter='athover()'>Bai!</button></a></p>";
+    end.innerHTML = "<h1>You lost your life.</h1><p>play again?</p><p><a href="play.html"><button onmouseenter='athover()'>Yes</button></a><a href='/index.html'><button onmouseenter='athover()'>Bai!</button></a></p>";
 
     document.body.appendChild(end);
 }
